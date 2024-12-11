@@ -26,7 +26,7 @@ const Hero = ({ isVideoPlaying }) => {
   }, [loadedVideos]);
 
   // Hardcoded video path
-  const getVideoSrc = "/videos/hero-1.mp4";  // Directly refer to the public folder path
+  const getVideoSrc = "/React-port/public/videos/hero-1.mp4";// Directly refer to the public folder path
 
   useGSAP(() => {
     gsap.set("#video-frame", {

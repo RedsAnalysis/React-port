@@ -4,3 +4,9 @@ feature-3.mp4 filter=lfs diff=lfs merge=lfs -text
 feature-4.mp4 filter=lfs diff=lfs merge=lfs -text
 feature-5.mp4 filter=lfs diff=lfs merge=lfs -text
 hero-1.mp4 filter=lfs diff=lfs merge=lfs -text
+dist/videos/hero-1.mp4 filter=lfs diff=lfs merge=lfs -text
+dist/videos/feature-1.mp4 filter=lfs diff=lfs merge=lfs -text
+dist/videos/feature-2.mp4 filter=lfs diff=lfs merge=lfs -text
+dist/videos/feature-3.mp4 filter=lfs diff=lfs merge=lfs -text
+dist/videos/feature-4.mp4 filter=lfs diff=lfs merge=lfs -text
+dist/videos/feature-5.mp4 filter=lfs diff=lfs merge=lfs -text

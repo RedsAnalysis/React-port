@@ -13,18 +13,18 @@ const Contact = () => {
       <div className="relative rounded-lg bg-black py-24 text-blue-50 sm:overflow-hidden">
         <div className="absolute -left-20 top-0 hidden h-auto w-72 overflow-hidden sm:block lg:left-20 lg:w-96">
           <ImageClipBox
-            src="/React-port/public//img/contact-1.png"
+            src="/img/contact-1.png"
             clipClass="contact-clip-path-1"
           />
           <ImageClipBox
-            src="/React-port/public//img/contact-2.png"
+            src="/img/contact-2.png"
             clipClass="contact-clip-path-2 lg:translate-y-3 translate-y-3"
           />
         </div>
 
         <div className="absolute -top-40 left-20 w-60 sm:top-1/2 md:left-auto md:right-10 lg:top-20 lg:w-80">
           <ImageClipBox
-            src="/React-port/public//img/swordman.jpg"
+            src="/img/swordman.jpg"
             clipClass="sword-man-clip-path md:scale-125"
           />
         </div>

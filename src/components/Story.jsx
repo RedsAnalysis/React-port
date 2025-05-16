@@ -67,7 +67,7 @@ const FloatingImage = () => {
                   onMouseLeave={handleMouseLeave}
                   onMouseUp={handleMouseLeave}
                   onMouseEnter={handleMouseLeave}
-                  src="/React-port/public/img/enter.png"
+                  src="/img/enter.png"
                   alt="enter.png"
                   className="object-contain"
                 />

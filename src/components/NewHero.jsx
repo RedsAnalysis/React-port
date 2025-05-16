@@ -8,8 +8,14 @@ import { ScrollTrigger } from "gsap/all";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Array of your SVG filenames
+const svgLogos = [
+  'claude', 'gemini', 'grok-text', 'mistral', 'qwen', 'grok', 'chatgpt', 'deepseek', 'gemini-brand', 'hf', 'nvidia'
+  // Make sure these names (without .svg) match your files in public/img/
+];
+
 const NewHero = () => {
-  const itemCount = 10; // Or however many dragon images you have
+  const itemCount = svgLogos.length;
   const heroWrapperRef = useRef(null);
   const animatedFrameRef = useRef(null);
 
@@ -32,35 +38,31 @@ const NewHero = () => {
       scrollTrigger: {
         trigger: heroWrapperRef.current,
         start: "center center",
-        end: "bottom top", // Adjust as needed
+        end: "bottom top",
         scrub: true,
       },
     });
-
   }, { scope: heroWrapperRef });
 
   return (
     <div className="new-hero-wrapper" ref={heroWrapperRef}>
       <div className="animated-hero-frame" ref={animatedFrameRef}>
-        <div className="new-hero-background-image-container" /> {/* For bg.png */}
+        <div className="new-hero-background-image-container" />
         <div className="banner">
           <div className="slider" style={{ '--quantity': itemCount }}>
-            {Array.from({ length: itemCount }).map((_, index) => (
+            {svgLogos.map((logoName, index) => (
               <div
-                className="item"
-                key={index}
+                className="item svg-item" // Added svg-item class
+                key={logoName}
                 style={{ '--position': index + 1 }}
               >
-                <img src={`/img/dragon_${index + 1}.jpg`} alt={`Dragon ${index + 1}`} />
+                {/* Corrected path to use .svg */}
+                <img src={`/img/${logoName}.svg`} alt={`${logoName} logo`} />
               </div>
             ))}
           </div>
-          {/* Content div is kept for structure if .model is still used within it,
-              but h1 and author are removed. */}
           <div className="content">
-            {/* <h1 data-content="CSS ONLY"></h1> Removed */}
-            {/* <div className="author"></div> Removed */}
-            <div className="model" /> {/* For model.png background */}
+            <div className="model" />
           </div>
         </div>
       </div>

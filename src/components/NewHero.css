@@ -46,29 +46,29 @@
 }
 
 
-/* --- Styles from your provided style.css --- */
-/* Ensure banner and its contents are positioned within .animated-hero-frame */
 .banner{
     width: 100%;
-    height: 100%; /* Fill the animated-hero-frame */
+    height: 100%;
     text-align: center;
-    /* overflow: hidden; -- remove if .animated-hero-frame handles it */
     position: relative;
-    z-index: 2; /* Above .new-hero-background-image-container */
+    z-index: 2;
 }
+
 .banner .slider{
     position: absolute;
-    width: 200px;
-    height: 250px;
-    top: 10%;
-    left: calc(50% - 100px);
+    width: 200px; /* Original width */
+    height: 250px; /* Original height */
+    top: 10%; /* Original top position */
+    left: calc(50% - 100px); /* Original left position */
     transform-style: preserve-3d;
-    transform: perspective(1000px) rotateX(-16deg) rotateY(0deg); /* Initial state for GSAP */
+    transform: perspective(1000px) rotateX(-16deg) rotateY(0deg); /* Keep original transform for animation base */
     animation: autoRun 20s linear infinite;
-    z-index: 3; /* Above banner content if necessary */
+    z-index: 3;
 }
+
 @keyframes autoRun{
     from{
+        /* The transform here should match the base transform of .banner .slider if it's complex */
         transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
     }to{
         transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
@@ -80,50 +80,38 @@
     inset: 0 0 0 0;
     transform:
         rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg))
-        translateZ(550px);
+        translateZ(550px); /* Original Z distance */
+    /* Optional padding for SVGs if they fill the entire item box too much */
+    /* padding: 5px; */
 }
-.banner .slider .item img{
+
+/* OLD image style (can be removed or kept if you switch back) */
+/* .banner .slider .item img{
     width: 100%;
     height: 100%;
     object-fit: cover;
+} */
+
+/* NEW style for SVG images within the items */
+.banner .slider .item.svg-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 'contain' is usually better for logos to keep aspect ratio and visibility */
+    padding: 5px; /* Add some padding so logos don't touch the edges of their container */
+    /* filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.5)); */ /* Optional: subtle shadow */
 }
+
 .banner .content{
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: min(1400px, 100vw);
-    height: max-content;
-    padding-bottom: 100px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 2; /* Above model but potentially below slider */
-}
-.banner .content h1{
-    font-family: 'ICA Rubrik Black', sans-serif;
-    font-size: 16em;
-    line-height: 1em;
-    color: #25283B;
-    position: relative;
-}
-.banner .content h1::after{
-    position: absolute;
-    inset: 0 0 0 0;
-    content: attr(data-content);
+    height: 100%;
     z-index: 2;
-    -webkit-text-stroke: 2px #d2d2d2;
-    color: transparent;
+    pointer-events: none;
 }
-.banner .content .author{
-    font-family: 'Poppins', sans-serif;
-    text-align: right;
-    max-width: 200px;
-}
-.banner .content .author h2{
-    font-size: 3em;
-}
+
 .banner .content .model{
     background-image: url('/img/model.png');
     width: 100%;
@@ -131,22 +119,17 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    background-size: auto 130%;
+    background-size: auto 100%;
     background-repeat: no-repeat;
-    background-position: top center;
-    z-index: 1; /* Behind .content text */
+    background-position: bottom center;
+    z-index: 1;
 }
 
-/* Styles for the text that gets revealed */
 .revealed-text {
-    /* Uses special-font and hero-heading from index.css */
-    /* absolute bottom-5 right-5 text-black are Tailwind classes */
-    z-index: 5; /* Lower than the initial z-index of .animated-hero-frame */
-                 /* but might need to be higher than other global elements if any */
+    z-index: 5;
 }
 
-
-/* --- Media Queries --- */
+/* Media Queries - Keep them as they were, they adjust the slider's overall size and item's Z distance */
 @media screen and (max-width: 1023px) {
     .banner .slider{
         width: 160px;
@@ -157,22 +140,6 @@
         transform:
             rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg))
             translateZ(300px);
-    }
-    .banner .content h1{
-        text-align: center;
-        width: 100%;
-        text-shadow: 0 10px 20px #000;
-        font-size: 7em;
-    }
-    .banner .content .author{
-        color: #fff;
-        padding: 20px;
-        text-shadow: 0 10px 20px #000;
-        z-index: 2;
-        max-width: unset;
-        width: 100%;
-        text-align: center;
-        padding: 0 30px;
     }
 }
 @media screen and (max-width: 767px) {
@@ -185,8 +152,5 @@
         transform:
             rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg))
             translateZ(180px);
-    }
-    .banner .content h1{
-        font-size: 5em;
     }
 }

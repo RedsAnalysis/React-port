@@ -12,7 +12,7 @@ export const projects = [
       <div style="display: flex; flex-wrap: wrap; align-items: flex-start; margin-bottom: 2rem; gap: 2rem;">
         <div style="flex: 1; min-width: 280px;">
           <h2>Arambhumi Reddy</h2>
-          <blockquote style="font-style: italic; color: #F0F2FA; border-left: 3px solid #edff66; padding-left: 1rem; margin-left: 0; margin-bottom: 1.5rem;">
+          <blockquote style="font-style: italic; color: #F0F2FA; border-left: 3px solid #6acdf5; padding-left: 1rem; margin-left: 0; margin-bottom: 1.5rem;">
             "Driven by a passion for excellence and innovation in the world of AI."
           </blockquote>
           <p>With a Master's in Data Science and over 5 years of experience in the tech industry, my work is characterized by a commitment to the highest standards and meticulous attention to detail.</p>
@@ -39,19 +39,19 @@ export const projects = [
   {
     // PROJECT 1: RAG
     id: "advanced-rag-system",
-    cardVideoSrc: "/videos/rag-system-showcase.mp4", // REPLACE with your RAG video
+    cardVideoSrc: "/img/rag.JPG", // REPLACE with your RAG video
     cardTitle: <>Advanced <b>RAG</b> System</>,
     cardDescription: "Architecting and optimizing a high-performance RAG system for factual grounding and relevance.",
     isComingSoon: false, // Assuming you want to show this now
     pageTitle: "Optimized Retrieval-Augmented Generation",
-    pageHeroImage: "/img/rag-hero.jpg", // REPLACE with your RAG hero image
+    pageHeroImage: "/img/rag.JPG", // REPLACE with your RAG hero image
     pageContent: `
       <h2>Project Overview: Enterprise RAG Implementation</h2>
       <p>At IvorSource, I led the architecture and development of a sophisticated Retrieval-Augmented Generation (RAG) system designed to enhance the factual accuracy and relevance of Large Language Model responses within the enterprise. The primary goal was to ground LLM outputs in verified internal knowledge, significantly reducing hallucinations and improving the reliability of AI-assisted tasks.</p>
       
       <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-bottom: 2rem;">
         <div style="flex: 1; min-width: 300px;">
-          <img src="/img/rag-architecture-diagram.png" alt="RAG System Architecture" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+          <img src="/img/rag.JPG" alt="RAG System Architecture" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
           <p style="text-align: center; font-size: 0.9em; color: #ccc;"><em>High-level architecture of the RAG system.</em></p>
         </div>
         <div style="flex: 1; min-width: 300px;">

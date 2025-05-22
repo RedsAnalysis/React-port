@@ -1,0 +1,18 @@
+/* src/index.css or VerticalParallaxScrollText.css */
+.vertical-parallax-text-container {
+    /* Basic styling, you'll position this absolutely in NewHero */
+    width: 100%;
+    text-align: center;
+    /* Add any specific text styling here or pass via className */
+  }
+  
+  /* Example styling for the text itself if passed as children */
+  .hero-bottom-parallax-text {
+    font-family: "Zentry", sans-serif;
+    font-size: clamp(2rem, 5vw, 4rem); /* Responsive font size */
+    color: rgba(223, 223, 240, 0.15); /* Subtle text color, e.g., light gray/blue-50 */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 20px 0;
+    /* pointer-events: none; /* If it shouldn't be interactive */
+  }

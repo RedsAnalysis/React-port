@@ -1,0 +1,38 @@
+
+  .project-side-nav {
+    position: fixed; /* Fixed to the viewport */
+    top: 0;
+    bottom: 0;
+    width: 15%; /* Adjust width of clickable area, e.g., 100px or 15vw */
+    max-width: 120px; /* Max width for very large screens */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20; /* Above page content, below modals if any */
+    /* background-color: rgba(255, 0, 0, 0.1); /* For debugging clickable area */
+  }
+  
+  .project-side-nav.left-nav {
+    left: 0;
+    /* justify-content: flex-start;
+    padding-left: 20px; */
+  }
+  
+  .project-side-nav.right-nav {
+    right: 0;
+    /* justify-content: flex-end;
+    padding-right: 20px; */
+  }
+  
+  .project-side-nav .nav-arrow {
+    font-size: 2rem; /* Adjust icon size */
+    color: rgba(255, 255, 255, 0.5); /* Adjust icon color and opacity */
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+  
+  .project-side-nav.group:hover .nav-arrow {
+    opacity: 1;
+    color: #edff66; /* yellow-300 */
+    transform: scale(1.2);
+  }

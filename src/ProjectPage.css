@@ -1,0 +1,42 @@
+/* In index.css or a dedicated ProjectPage.css */
+
+.project-page-container {
+  /* Transition is now applied inline via style prop in JSX */
+}
+
+.project-nav-button {
+  @apply inline-flex items-center text-yellow-300 hover:text-yellow-400 font-general text-sm uppercase py-2 px-3 md:px-4 rounded-md transition-colors duration-200 whitespace-nowrap;
+  /* Consider adding a border or subtle background for better definition */
+  /* border: 1px solid theme('colors.yellow.300 / 0.3'); */
+}
+
+.project-nav-button:hover {
+  /* background-color: theme('colors.yellow.300 / 0.1'); */
+}
+
+.project-nav-button.back-to-portfolio-button {
+  @apply bg-yellow-300 text-black hover:bg-yellow-400 px-5 md:px-6;
+}
+
+.project-nav-icon {
+  @apply text-base; /* Or text-sm if preferred */
+}
+
+/* Styling for the prose content from Tailwind Typography should already be in tailwind.config.js and your main CSS if configured */
+.project-page-container .prose {
+  --tw-prose-links: theme('colors.yellow.300');
+  --tw-prose-invert-links: theme('colors.yellow.300');
+  --tw-prose-body: theme('colors.blue.100 / 0.9');
+  --tw-prose-invert-body: theme('colors.blue.100 / 0.9');
+}
+
+.project-page-container .prose h2,
+.project-page-container .prose h3,
+.project-page-container .prose h4 {
+  @apply font-zentry text-yellow-200;
+  letter-spacing: 0.025em;
+}
+
+.project-page-container .prose strong {
+  @apply text-yellow-100;
+}

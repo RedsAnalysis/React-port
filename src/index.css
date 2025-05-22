@@ -4,12 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
 body {
   width: 100dvw;
   overflow-x: hidden;
-  /* background-color: #dfdff0; */ /* Original global background */
-  background-color: #e4d2d4; /* Your new specified background for context */
+  background-color: #c2ca9c; /* MAKE THIS DARK! e.g., gray-950 or black */
   font-family: "General Sans", sans-serif;
+  color: #DFDFF0; /* Default text color for the site, if most pages are dark */
 }
 
 @layer base {
@@ -286,4 +287,33 @@ body {
     transform: translateY(66%) scale(0.65);
     opacity: 0.8;
   }
+}
+/* src/styles/ProjectPage.css or add to index.css */
+
+/* Tailwind Typography will handle most of .prose styling */
+/* You can add overrides here if needed */
+.project-page-container .prose {
+  /* Example: Custom link color within project content */
+  --tw-prose-links: theme('colors.yellow.300');
+  --tw-prose-invert-links: theme('colors.yellow.300'); /* For prose-invert */
+  --tw-prose-body: theme('colors.blue.100 / 0.9'); /* Adjust body text color/opacity */
+  --tw-prose-invert-body: theme('colors.blue.100 / 0.9');
+}
+
+.project-page-container .prose h2,
+.project-page-container .prose h3,
+.project-page-container .prose h4 {
+  /* Ensure Zentry font is applied if not by default in prose */
+  @apply font-zentry text-yellow-200; /* A slightly less bright yellow for headings */
+  letter-spacing: 0.025em; /* Optional: adjust letter spacing for Zentry */
+}
+
+.project-page-container .prose strong {
+  @apply text-yellow-100; /* Make strong text stand out more */
+}
+
+/* If using AnimatedTitle on project page, ensure it's styled appropriately */
+.project-page-container .animated-title {
+  /* Example: Overrides for project page title if needed */
+  /* text-align: center; */
 }

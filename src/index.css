@@ -120,19 +120,118 @@ body {
     @apply uppercase md:text-6xl text-4xl font-black font-zentry;
   }
 
-  .story-img-container {
-    @apply relative md:h-dvh h-[90vh] w-full;
-    filter: url("#flt_tag");
+  .story-slider-container {
+    width: 100%; /* Full width of its parent */
+    overflow: hidden; /* Crucial for the sliding effect */
+    /* background-color: #0a0a0a; /* Optional: Darker strip for slider if needed */
+    padding: 10px 0; /* Vertical padding around the track */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
   }
-
-  .story-img-mask {
-    @apply absolute left-0 top-0 size-full overflow-hidden md:left-[20%] md:top-[-10%] md:size-4/5;
-    clip-path: polygon(4% 0, 83% 21%, 100% 73%, 0% 100%);
+  
+  .story-slider-track {
+    display: flex;
+    /* width is set by inline style based on image count */
+    animation: scrollLeft var(--animation-duration) linear infinite;
+    will-change: transform; /* Performance hint for animation */
   }
-
-  .story-img-content {
-    @apply absolute w-full md:h-dvh h-[50dvh] opacity-100 left-10 top-16 md:left-0 md:top-10 lg:left-[-300px] lg:top-[-100px];
-    transform: translate3d(0, 0, 0) rotateX(0) rotateY(0) rotateZ(0) scale(1);
+  
+  .story-slider-track.paused {
+    animation-play-state: paused;
+  }
+  
+  .story-slider-item {
+    flex-shrink: 0; /* Prevent images from shrinking */
+    /* height and width set by inline style */
+    /* margin-right set by inline style */
+    border-radius: 12px; /* Slightly more rounded */
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .story-slider-item:hover {
+    transform: scale(1.08) translateY(-5px); /* More pronounced hover */
+    z-index: 10; /* Bring to front on hover */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+  }
+  
+  .story-slider-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures images fill the item, cropping if necessary */
+    display: block; /* Removes any bottom space under image */
+  }
+  
+  @keyframes scrollLeft {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-1 * var(--track-width-single-set)));
+      /* Moves one full set of original images, then repeats */
+    }
+  }
+  
+  /* Modal Styles */
+  .image-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85); /* Slightly darker overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 15px; /* SafeArea for mobile */
+  }
+  
+  .image-modal-content {
+    position: relative;
+    background-color: #1c1c1e; /* Dark gray for content background */
+    padding: 8px; /* Minimal padding around the image itself */
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .image-modal-content img {
+    display: block;
+    max-width: 100%;
+    max-height: calc(90vh - 16px); /* Account for padding of .image-modal-content */
+    object-fit: contain; /* Show the whole image, maintain aspect ratio */
+    border-radius: 6px; /* Rounded corners for the image inside modal */
+  }
+  
+  .image-modal-close-button {
+    position: absolute;
+    top: -18px; /* Positioned to overlap slightly and be accessible */
+    right: -18px;
+    background: #f0f0f0; /* Light background for visibility */
+    color: #1c1c1e;   /* Dark text */
+    border: 2px solid #1c1c1e; /* Border matching modal content for definition */
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  .image-modal-close-button:hover {
+    background-color: #ffffff;
+    transform: scale(1.1);
   }
 
   .gallery-img-container {

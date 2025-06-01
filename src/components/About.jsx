@@ -30,18 +30,18 @@ const About = () => {
     <div id="about" className="min-h-screen w-screen">
       <div className="relative mb-8 mt-36 flex flex-col items-center gap-5">
         <p className="font-general text-sm uppercase md:text-[10px]">
-          Welcome to The Portfolio
+          
         </p>
 
         <AnimatedTitle
-          title="Disc<b>o</b>ver the world's <br /> largest shared <b>a</b>dventure"
+          title="Wel<b>co</b>me to my <br /> Portfolio <b></b>"
           containerClass="mt-5 !text-black text-center"
         />
 
         <div className="about-subtext">
-          <p>I'm a Machine Learning</p>
+          <p>I'm an AI Engineer</p>
           <p className="text-gray-500">
-          As an ML engineer, I specialize in developing intelligent systems that optimize decision-making through advanced machine learning techniques.
+          As an AI engineer, I specialize in developing intelligent systems that optimize decision-making through advanced LLMs and Deep learning techniques.
           </p>
         </div>
       </div>

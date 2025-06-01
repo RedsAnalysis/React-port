@@ -109,12 +109,12 @@ export const projects = [
   },
   {
     id: "notifyvisitors-growth-journey",
-    cardVideoSrc: "/videos/notifyvisitors-feature.mp4",
+    cardImageSrc: "/img/notifyvisitorlogo.png",
     cardTitle: <>Notify<b>Visitors</b></>,
     cardDescription: "My foundational journey in data science, contributing to 40%+ growth and user engagement.",
     isComingSoon: false,
     pageTitle: "NotifyVisitors: My Data Science Genesis & Growth Impact",
-    pageHeroImage: "/img/notifyvisitors-hero.jpg",
+    pageHeroImage: "/img/notifyvisitorlogo.png",
     pageIntro: `
       <p class="text-lg md:text-xl leading-relaxed">NotifyVisitors was where my professional journey in data truly began, transitioning from Junior Data Analyst to Data Scientist. This period was instrumental in developing my analytical mindset and technical skills, particularly in leveraging data to drive business success and user engagement.</p>
     `,

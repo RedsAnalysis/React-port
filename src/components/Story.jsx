@@ -77,14 +77,14 @@ const Story = () => {
 
   return (
     <div id="story" className="min-h-dvh w-screen bg-black text-blue-50 overflow-x-hidden"> {/* Added overflow-x-hidden */}
-      <div className="flex size-full flex-col items-center py-10 pb-24">
+      <div className="flex size-full flex-col items-center py-7 pb-35">
         <p className="font-general text-sm uppercase md:text-[10px]">
-          The new world order
+          
         </p>
 
         <div className="relative w-full flex flex-col items-center">
           <AnimatedTitle
-            title="The st<b>o</b>ry of <br /> ai ris<b>e</b>"
+            title="My <b> Per</b>sonal <br /> ai <b> art </b>"
             containerClass="mt-5 pointer-events-none mix-blend-difference relative z-20"
           />
 

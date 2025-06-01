@@ -16,7 +16,7 @@
     width: 100%;
     height: 100%;
     overflow: hidden; /* Crucial for clip-path to work as expected */
-    background-color: #333f41; /* This was the body background */
+    background-color: #0a090a; /* This was the body background */
     background-image:
         repeating-linear-gradient(
             to right, transparent 0 100px,

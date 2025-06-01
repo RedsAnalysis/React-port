@@ -1,9 +1,9 @@
 // src/components/Projects.jsx
 import { useState, useRef } from "react";
-import { TiLocationArrow } from "react-icons/ti";
 import { Link } from 'react-router-dom';
-import { projects } from '../projectData.jsx';
-import { motion } from 'framer-motion'; // Import motion
+import { projects } from '../projectData.jsx'; // Make sure this path is correct
+import { motion } from 'framer-motion';
+import { TiLocationArrow } from "react-icons/ti"; // Re-added this import
 
 // BentoTilt component (remains the same)
 export const BentoTilt = ({ children, className = "" }) => {
@@ -19,7 +19,6 @@ export const BentoTilt = ({ children, className = "" }) => {
     const tiltX = (relativeY - 0.5) * 5;
     const tiltY = (relativeX - 0.5) * -5;
 
-    // MODIFIED LINE: Removed scale3d
     const newTransform = `perspective(700px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
     setTransformStyle(newTransform);
   };
@@ -41,23 +40,27 @@ export const BentoTilt = ({ children, className = "" }) => {
   );
 };
 
-// BentoCard component (remains the same)
-export const BentoCard = ({ videoSrc, title, description, isComingSoon, cardStaticBgClass }) => {
-  // ... (BentoCard code) ...
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const [hoverOpacity, setHoverOpacity] = useState(0);
-  const hoverButtonRef = useRef(null);
+// BentoCard component
+export const BentoCard = ({
+  videoSrc,
+  cardImageSrc,
+  title,
+  description,
+  // isComingSoon, // Prop removed as per previous request
+  cardStaticBgClass,
+  cardTextColor // Prop for explicit text color
+}) => {
 
-  const handleMouseMoveCard = (event) => {
-    if (!hoverButtonRef.current) return;
-    const rect = hoverButtonRef.current.getBoundingClientRect();
-    setCursorPosition({ x: event.clientX - rect.left, y: event.clientY - rect.top });
-  };
-  const handleMouseEnterCard = () => setHoverOpacity(1);
-  const handleMouseLeaveCard = () => setHoverOpacity(0);
+  // Determine background class: only apply static if no video and no image
+  const backgroundClass = !videoSrc && !cardImageSrc && cardStaticBgClass ? cardStaticBgClass : '';
+  
+  // Determine text color: use provided cardTextColor or default to text-blue-50 if not provided
+  // Ensure text-blue-50 is your desired light color class from Tailwind
+  const textColorClass = cardTextColor || 'text-blue-50';
+
 
   return (
-    <div className={`relative size-full ${!videoSrc && cardStaticBgClass ? cardStaticBgClass : ''}`}>
+    <div className={`relative size-full ${backgroundClass}`}>
       {videoSrc && (
         <video
           src={videoSrc}
@@ -68,38 +71,31 @@ export const BentoCard = ({ videoSrc, title, description, isComingSoon, cardStat
           className="absolute left-0 top-0 size-full object-cover object-center"
         />
       )}
-      <div className={`relative z-10 flex size-full flex-col justify-between p-5 ${!videoSrc && cardStaticBgClass ? 'text-black' : 'text-blue-50'}`}>
+      {!videoSrc && cardImageSrc && (
+        <img
+          src={cardImageSrc}
+          alt={typeof title === 'string' ? title.replace(/<[^>]+>/g, '') : 'Project Card Image'}
+          className="absolute left-0 top-0 size-full object-cover object-center"
+        />
+      )}
+
+      {/* Content Overlay - Now uses textColorClass directly */}
+      <div className={`relative z-10 flex size-full flex-col justify-between p-5 ${textColorClass}`}>
         <div>
           <h1 className="bento-title special-font">{title}</h1>
-          {description && (videoSrc || !cardStaticBgClass) && (
+          {description && ( // Show description if it exists
             <p className="mt-3 max-w-64 text-xs md:text-base">{description}</p>
           )}
-           {!videoSrc && title.props && title.props.children.some(child => typeof child === 'string' && child.includes("More")) && (
-             <TiLocationArrow className="m-5 scale-[5] self-end text-black" />
+           {/* Logic for the "More..." icon if it's still relevant:
+               Only show if it's a static background card AND the title includes "More"
+           */}
+           {!videoSrc && !cardImageSrc && cardStaticBgClass && 
+            title && title.props && title.props.children && Array.isArray(title.props.children) &&
+            title.props.children.some(child => typeof child === 'string' && child.includes("More")) && (
+             <TiLocationArrow className={`m-5 scale-[5] self-end ${textColorClass}`} />
            )}
         </div>
-        {isComingSoon && (
-          <div
-            ref={hoverButtonRef}
-            onMouseMove={handleMouseMoveCard}
-            onMouseEnter={handleMouseEnterCard}
-            onMouseLeave={handleMouseLeaveCard}
-            className={`border-hsla relative flex w-fit cursor-pointer items-center gap-1 overflow-hidden rounded-full px-5 py-2 text-xs uppercase
-                        ${!videoSrc && cardStaticBgClass ? 'bg-white text-black/70 border-black/30' : 'bg-black text-white/20'}`}
-          >
-            <div
-              className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"
-              style={{
-                opacity: hoverOpacity,
-                background: `radial-gradient(100px circle at ${cursorPosition.x}px ${cursorPosition.y}px, 
-                                          ${!videoSrc && cardStaticBgClass ? '#A891E288' : '#656fe288'}, 
-                                          #00000026)`,
-              }}
-            />
-            <TiLocationArrow className="relative z-20" />
-            <p className="relative z-20">coming soon</p>
-          </div>
-        )}
+        {/* "Coming Soon" button has been removed */}
       </div>
     </div>
   );
@@ -120,21 +116,18 @@ const Projects = () => (
         {projects.map((project, index) => {
           const isFirstItemLarge = index === 0;
           const colSpanClass = isFirstItemLarge ? "md:col-span-2" : "md:col-span-1";
-          // Ensure consistent height for better visual of rotation and scaling for grid items
-          const heightClass = isFirstItemLarge ? "h-96 md:h-[65vh]" : "h-[50vh] md:h-[60vh]"; // Or a fixed pixel height like h-96
+          const heightClass = isFirstItemLarge ? "h-96 md:h-[65vh]" : "h-[50vh] md:h-[60vh]";
 
-          // --- Animation props for the grid items (not the first large one) ---
           const gridItemAnimation = !isFirstItemLarge ? {
             animate: {
-              transition: { ease: "linear", duration: 20, repeat: Infinity } // Slower duration for subtle bg rotation
+              transition: { ease: "linear", duration: 20, repeat: Infinity }
             },
             whileHover: {
-              scale: 1.05, // Pop effect: scale up slightly
-              zIndex: 20,  // Bring to front on hover
+              scale: 1.05,
+              zIndex: 20,
               transition: { duration: 0.2 }
             },
-          } : {}; // No animation for the first large card
-
+          } : {};
 
           return (
             <Link
@@ -142,20 +135,20 @@ const Projects = () => (
               key={project.id}
               className={`block no-underline ${colSpanClass} ${heightClass} project-card-link`}
             >
-              {/* Wrap BentoTilt with motion.div for the grid items */}
               <motion.div
-                className="h-full w-full" // Ensure motion.div fills the Link
-                {...gridItemAnimation} // Spread the animation props
+                className="h-full w-full"
+                {...gridItemAnimation}
               >
                 <BentoTilt className="border-hsla relative size-full overflow-hidden rounded-md">
                   <BentoCard
                     videoSrc={project.cardVideoSrc}
+                    cardImageSrc={project.cardImageSrc}
                     title={project.cardTitle}
                     description={project.cardDescription}
-                    isComingSoon={project.isComingSoon}
                     cardStaticBgClass={project.cardStaticBgClass}
+                    cardTextColor={project.cardTextColor}
                   />
-                </BentoTilt>
+                </BentoTilt> {/* <--- CORRECTED: Ensure BentoTilt has a proper closing tag */}
               </motion.div>
             </Link>
           );

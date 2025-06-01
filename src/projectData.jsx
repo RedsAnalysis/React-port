@@ -51,7 +51,7 @@ export const projects = [
   },
   {
     id: "advanced-rag-system",
-    cardVideoSrc: "/img/rag.JPG",
+    cardImageSrc: "/img/rag1.jpg",
     cardTitle: <>Advanced <b>RAG</b> System</>,
     cardDescription: "Architecting and optimizing a high-performance RAG system for factual grounding and relevance.",
     isComingSoon: false,
@@ -108,10 +108,92 @@ export const projects = [
     ]
   },
   {
-    id: "llm-serving-and-monitoring",
-    cardVideoSrc: "/videos/mlops-showcase.mp4",
-    cardTitle: <>LLM <b>MLOps</b> & TTS</>,
-    cardDescription: "Containerized LLM deployment, real-time monitoring, and custom TTS integration.",
+    id: "notifyvisitors-growth-journey",
+    cardVideoSrc: "/videos/notifyvisitors-feature.mp4",
+    cardTitle: <>Notify<b>Visitors</b></>,
+    cardDescription: "My foundational journey in data science, contributing to 40%+ growth and user engagement.",
+    isComingSoon: false,
+    pageTitle: "NotifyVisitors: My Data Science Genesis & Growth Impact",
+    pageHeroImage: "/img/notifyvisitors-hero.jpg",
+    pageIntro: `
+      <p class="text-lg md:text-xl leading-relaxed">NotifyVisitors was where my professional journey in data truly began, transitioning from Junior Data Analyst to Data Scientist. This period was instrumental in developing my analytical mindset and technical skills, particularly in leveraging data to drive business success and user engagement.</p>
+    `,
+    pageSections: [
+      {
+        image: "/img/notifyvisitors-dashboard-example.png", // Existing image
+        alt: "NotifyVisitors User Engagement Dashboard Example",
+        text: `
+          <h3>Early Contributions & User Engagement Focus</h3>
+          <p>My initial role involved analyzing user behavior—app installs, clicks, reviews, and purchase history—to uncover insights. Upon promotion to Data Scientist, I focused heavily on user engagement. I applied Machine Learning algorithms like <strong>Random Forest and XGBoost</strong> to identify anomalies and predict user actions, using <strong>Grid Search</strong> for hyperparameter tuning and <strong>PCA</strong> for feature extraction.</p>
+          <p>This data-driven approach to understanding and influencing user behavior directly contributed to boosting user engagement by over <strong>45% within an 8-month period</strong>. These insights were translated into actionable strategies, contributing to over <strong>40% overall company growth.</strong></p>
+        `
+      },
+      {
+        image: "/img/project-assets/ml-model-workflow.jpg", // Replace with a conceptual ML workflow diagram
+        alt: "Machine Learning Model Development Workflow",
+        text: `
+          <h3>Key Achievements & Learnings</h3>
+          <p>My time at NotifyVisitors was a period of intense learning and significant professional growth. It solidified my passion for leveraging data to solve complex problems.</p>
+          <ul>
+            <li>Contributed to boosting user engagement by over 45%.</li>
+            <li>Played a role in company initiatives leading to over 40% growth.</li>
+            <li>Mastered ML algorithms (Random Forest, XGBoost) and techniques (Grid Search, PCA).</li>
+            <li>Gained deep experience in analyzing user behavioral data.</li>
+            <li>Developed skills in presenting complex data insights.</li>
+          </ul>
+          <p>This experience shaped me into the data scientist and AI practitioner I am today.</p>
+        `
+      }
+      // Add more sections if desired
+    ]
+  },
+  {
+    id: "FSU",
+    cardStaticBgClass: "bg-teal-300",
+    cardTitle: <>Data <b>Analyst</b></>,
+    cardImageSrc: "/img/fsulogo.svg",
+    cardDescription: "",
+    isComingSoon: false,
+    pageTitle: "State of Florida: Inmate Analysis Dashboard (Power BI)",
+    pageHeroImage: "/img/powerbi-dashboard-hero.jpg",
+    pageIntro: `
+      <p class="text-lg md:text-xl leading-relaxed">During my tenure as a Data Analyst at Florida State University, I developed an Inmate Analysis Dashboard for a State of Florida initiative. This project aimed to provide clearer insights into inmate population trends, demographics, and other key metrics to support data-driven decision-making.</p>
+    `,
+    pageSections: [
+      {
+        image: "/img/powerbi-inmate-dashboard-mockup.png", // Existing image
+        alt: "Power BI Inmate Dashboard Mockup",
+        text: `
+          <h3>Dashboard Design & Technical Implementation</h3>
+          <p>My role was to transform raw data into actionable intelligence using <strong>Microsoft Power BI</strong>. This involved meticulous data modeling to structure and relate diverse datasets pertaining to inmate information. I authored complex <strong>Data Analysis Expressions (DAX)</strong> to create custom calculations, key performance indicators (KPIs), and dynamic metrics that were central to the dashboard's utility.</p>
+          <p>I designed a suite of professional, interactive visualizations—charts, graphs, and tables—to present the data intuitively. The dashboard enabled users to explore trends over time, filter by various demographic factors, and drill down into specific details, offering a significant improvement over previous manual reporting methods.</p>
+        `
+      },
+      {
+        image: "/img/project-assets/powerbi-dax-example.jpg", // Replace with a conceptual DAX code snippet or data model diagram
+        alt: "Example of DAX measures or Data Model in Power BI",
+        text: `
+          <h3>Impact and Skills Utilized</h3>
+          <p>The resulting dashboard provided stakeholders with a nuanced understanding of inmate population dynamics, facilitating data-informed discussions and supporting strategic planning related to resource allocation and program effectiveness. The ability to quickly visualize trends and filter data was a key outcome.</p>
+          <h4>Skills Utilized:</h4>
+          <ul>
+            <li>Microsoft Power BI (Advanced)</li>
+            <li>DAX (Data Analysis Expressions)</li>
+            <li>Data Modeling & Visualization</li>
+            <li>Stakeholder Communication & Requirements Gathering</li>
+            <li>Data Analysis & Interpretation</li>
+          </ul>
+        `
+      }
+      // Add more sections if desired
+    ]
+  },
+  {
+    id: "Kiyo-Drip",
+    cardImageSrc: "/img/kiyodrip.png",
+    cardTitle: <>Kiyo-Drip <b>Clothing</b> Brand</>,
+    cardDescription: "",
+    cardTextColor: 'text-black',
     isComingSoon: false,
     pageTitle: "LLM Serving, Monitoring, and Custom TTS",
     pageHeroImage: "/img/mlops-dashboard-hero.jpg",
@@ -158,9 +240,9 @@ export const projects = [
     ]
   },
   {
-    id: "comfyui-contribution-docker",
+    id: "Open Source Contributions",
     cardVideoSrc: "/videos/comfyui-docker-feature.mp4",
-    cardTitle: <>ComfyUI <b>OSS</b></>,
+    cardTitle: <>Open <b>Source</b>Contributions</>,
     cardDescription: "Open-source contributions to ComfyUI, including advanced Dockerization for new GPUs.",
     isComingSoon: false,
     pageTitle: "ComfyUI: Open Source Contributions & Dockerization",
@@ -197,89 +279,9 @@ export const projects = [
     ]
   },
   {
-    id: "powerbi-inmate-dashboard",
-    cardStaticBgClass: "bg-teal-300",
-    cardTitle: <>PowerBI <b>Data</b>Viz</>,
-    cardDescription: "Developed an Inmate Analysis Dashboard for the State of Florida using Power BI and DAX.",
-    isComingSoon: false,
-    pageTitle: "State of Florida: Inmate Analysis Dashboard (Power BI)",
-    pageHeroImage: "/img/powerbi-dashboard-hero.jpg",
-    pageIntro: `
-      <p class="text-lg md:text-xl leading-relaxed">During my tenure as a Data Analyst at Florida State University, I developed an Inmate Analysis Dashboard for a State of Florida initiative. This project aimed to provide clearer insights into inmate population trends, demographics, and other key metrics to support data-driven decision-making.</p>
-    `,
-    pageSections: [
-      {
-        image: "/img/powerbi-inmate-dashboard-mockup.png", // Existing image
-        alt: "Power BI Inmate Dashboard Mockup",
-        text: `
-          <h3>Dashboard Design & Technical Implementation</h3>
-          <p>My role was to transform raw data into actionable intelligence using <strong>Microsoft Power BI</strong>. This involved meticulous data modeling to structure and relate diverse datasets pertaining to inmate information. I authored complex <strong>Data Analysis Expressions (DAX)</strong> to create custom calculations, key performance indicators (KPIs), and dynamic metrics that were central to the dashboard's utility.</p>
-          <p>I designed a suite of professional, interactive visualizations—charts, graphs, and tables—to present the data intuitively. The dashboard enabled users to explore trends over time, filter by various demographic factors, and drill down into specific details, offering a significant improvement over previous manual reporting methods.</p>
-        `
-      },
-      {
-        image: "/img/project-assets/powerbi-dax-example.jpg", // Replace with a conceptual DAX code snippet or data model diagram
-        alt: "Example of DAX measures or Data Model in Power BI",
-        text: `
-          <h3>Impact and Skills Utilized</h3>
-          <p>The resulting dashboard provided stakeholders with a nuanced understanding of inmate population dynamics, facilitating data-informed discussions and supporting strategic planning related to resource allocation and program effectiveness. The ability to quickly visualize trends and filter data was a key outcome.</p>
-          <h4>Skills Utilized:</h4>
-          <ul>
-            <li>Microsoft Power BI (Advanced)</li>
-            <li>DAX (Data Analysis Expressions)</li>
-            <li>Data Modeling & Visualization</li>
-            <li>Stakeholder Communication & Requirements Gathering</li>
-            <li>Data Analysis & Interpretation</li>
-          </ul>
-        `
-      }
-      // Add more sections if desired
-    ]
-  },
-  {
-    id: "notifyvisitors-growth-journey",
-    cardVideoSrc: "/videos/notifyvisitors-feature.mp4",
-    cardTitle: <>Notify<b>Visitors</b></>,
-    cardDescription: "My foundational journey in data science, contributing to 40%+ growth and user engagement.",
-    isComingSoon: false,
-    pageTitle: "NotifyVisitors: My Data Science Genesis & Growth Impact",
-    pageHeroImage: "/img/notifyvisitors-hero.jpg",
-    pageIntro: `
-      <p class="text-lg md:text-xl leading-relaxed">NotifyVisitors was where my professional journey in data truly began, transitioning from Junior Data Analyst to Data Scientist. This period was instrumental in developing my analytical mindset and technical skills, particularly in leveraging data to drive business success and user engagement.</p>
-    `,
-    pageSections: [
-      {
-        image: "/img/notifyvisitors-dashboard-example.png", // Existing image
-        alt: "NotifyVisitors User Engagement Dashboard Example",
-        text: `
-          <h3>Early Contributions & User Engagement Focus</h3>
-          <p>My initial role involved analyzing user behavior—app installs, clicks, reviews, and purchase history—to uncover insights. Upon promotion to Data Scientist, I focused heavily on user engagement. I applied Machine Learning algorithms like <strong>Random Forest and XGBoost</strong> to identify anomalies and predict user actions, using <strong>Grid Search</strong> for hyperparameter tuning and <strong>PCA</strong> for feature extraction.</p>
-          <p>This data-driven approach to understanding and influencing user behavior directly contributed to boosting user engagement by over <strong>45% within an 8-month period</strong>. These insights were translated into actionable strategies, contributing to over <strong>40% overall company growth.</strong></p>
-        `
-      },
-      {
-        image: "/img/project-assets/ml-model-workflow.jpg", // Replace with a conceptual ML workflow diagram
-        alt: "Machine Learning Model Development Workflow",
-        text: `
-          <h3>Key Achievements & Learnings</h3>
-          <p>My time at NotifyVisitors was a period of intense learning and significant professional growth. It solidified my passion for leveraging data to solve complex problems.</p>
-          <ul>
-            <li>Contributed to boosting user engagement by over 45%.</li>
-            <li>Played a role in company initiatives leading to over 40% growth.</li>
-            <li>Mastered ML algorithms (Random Forest, XGBoost) and techniques (Grid Search, PCA).</li>
-            <li>Gained deep experience in analyzing user behavioral data.</li>
-            <li>Developed skills in presenting complex data insights.</li>
-          </ul>
-          <p>This experience shaped me into the data scientist and AI practitioner I am today.</p>
-        `
-      }
-      // Add more sections if desired
-    ]
-  },
-  {
-    id: "portfolio-website-dev",
+    id: "Personal Projects",
     cardStaticBgClass: "bg-green-300",
-    cardTitle: <>Portfolio <b>Site</b> Dev</>,
+    cardTitle: <>Personal <b>Projects</b></>,
     cardDescription: "My first foray into JavaScript & React for building this interactive portfolio.",
     isComingSoon: false,
     pageTitle: "Portfolio Development: Embracing JavaScript & React",

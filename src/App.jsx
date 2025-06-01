@@ -26,7 +26,8 @@ function App() {
   const isProjectPage = location.pathname.startsWith('/project/');
 
   return (
-    <main className="relative min-h-screen w-screen overflow-x-hidden">
+    // Add bg-gray-950 to match ProjectPage background and prevent flash of body color
+    <main className="relative min-h-screen w-screen overflow-x-hidden bg-gray-950">
       {/* Conditionally render NavBar */}
       {!isProjectPage && (
         <NavBar isVideoPlaying={isVideoPlaying} toggleVideoPlayback={toggleVideoPlayback} />

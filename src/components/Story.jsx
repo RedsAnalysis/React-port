@@ -125,13 +125,16 @@ const Story = () => {
         <div className="relative z-10 -mt-2 flex w-full max-w-xl px-6 justify-center text-center md:-mt-0 md:max-w-md md:justify-end md:me-44 md:text-start">
           <div className="flex h-full w-fit flex-col items-center md:items-start">
             <p className="mt-3 text-base font-circular-web text-violet-50">
-              AI's rise is a convergence of limitless potential, unlocking new opportunities to reshape industries and drive innovation.
-              As we explore its secrets, we gain the power to shape the future.
+              AI art created using stable diffusion models locally with the help of comfyui.
             </p>
             <Button
               id="realm-btn"
               title="Find out More"
               containerClass="mt-5"
+              elementType="a" // Explicitly state it's a link
+              href="https://www.comfy.org/"
+              target="_blank"
+              rel="noopener noreferrer"
             />
           </div>
         </div>

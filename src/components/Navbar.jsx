@@ -6,51 +6,80 @@ import { TiLocationArrow } from "react-icons/ti";
 
 import Button from "./Button";
 
-const navItems = ["Reddy", "Archive", "Story", "About", "Contact"];
+const navItems = ["Home", "Projects", "Story", "About", "Contact"];
 
-const NavBar = ({ isVideoPlaying, toggleVideoPlayback }) => {
-  // State for toggling visual indicator
+const NavBar = ({ toggleVideoPlayback }) => {
   const [isIndicatorActive, setIsIndicatorActive] = useState(false);
 
-  // Toggle video playback when button is clicked
   const toggleVideoIndicator = () => {
-    toggleVideoPlayback(); // This will call the toggleVideoPlayback function from App
-    setIsIndicatorActive((prev) => !prev); // Optionally toggle indicator animation
+    if (toggleVideoPlayback) {
+      toggleVideoPlayback();
+    }
+    setIsIndicatorActive((prev) => !prev);
   };
 
-  // Refs for audio and navigation container
-  
   const navContainerRef = useRef(null);
-
   const { y: currentScrollY } = useWindowScroll();
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
+    if (!navContainerRef.current) return;
+
     if (currentScrollY === 0) {
-      // Topmost position: show navbar without floating-nav
       setIsNavVisible(true);
       navContainerRef.current.classList.remove("floating-nav");
     } else if (currentScrollY > lastScrollY) {
-      // Scrolling down: hide navbar and apply floating-nav
       setIsNavVisible(false);
       navContainerRef.current.classList.add("floating-nav");
     } else if (currentScrollY < lastScrollY) {
-      // Scrolling up: show navbar with floating-nav
       setIsNavVisible(true);
       navContainerRef.current.classList.add("floating-nav");
     }
-
     setLastScrollY(currentScrollY);
   }, [currentScrollY, lastScrollY]);
 
   useEffect(() => {
+    if (!navContainerRef.current) return;
+
     gsap.to(navContainerRef.current, {
       y: isNavVisible ? 0 : -100,
       opacity: isNavVisible ? 1 : 0,
       duration: 0.2,
     });
   }, [isNavVisible]);
+
+  const handleSmoothScroll = (e, targetId) => {
+    e.preventDefault(); // Prevent default anchor jump
+
+    if (targetId === 'home-equivalent') { // Special case for 'Home'
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    } else {
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        // Calculate position, accounting for fixed navbar height if necessary
+        const navbarHeight = navContainerRef.current ? navContainerRef.current.offsetHeight : 0;
+        // You might want to adjust this offset based on your navbar's actual height when it's visible
+        // and whether it's floating or not. For simplicity, a small fixed offset.
+        const offset = 80; // Adjust this value as needed (e.g., navbar height + some padding)
+
+        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - offset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+      } else {
+        console.warn(`Target element with ID "${targetId}" not found.`);
+        // Fallback to hash link if element not found, though ideally it should always be found
+        window.location.hash = targetId;
+      }
+    }
+  };
 
   return (
     <div
@@ -59,37 +88,41 @@ const NavBar = ({ isVideoPlaying, toggleVideoPlayback }) => {
     >
       <header className="absolute top-1/2 w-full -translate-y-1/2">
         <nav className="flex size-full items-center justify-between p-4">
-          {/* Logo and Product button */}
           <div className="flex items-center gap-7">
             <img src="/img/logo.png" alt="logo" className="w-10" />
-
-            <a href="https://github.com/RedsAnalysis/React-port" target="_blank" rel="noopener noreferrer">
             <Button
+              elementType="a"
+              href="https://github.com/RedsAnalysis/React-port"
+              target="_blank"
+              rel="noopener noreferrer"
               id="project-button"
-              title="Project"
+              title="Project Source"
               rightIcon={<TiLocationArrow />}
               containerClass="bg-blue-50 md:flex hidden items-center justify-center gap-1"
             />
-            </a>
           </div>
 
-          {/* Navigation Links */}
           <div className="flex h-full items-center">
             <div className="hidden md:block">
-              {navItems.map((item, index) => (
-                <a
-                  key={index}
-                  href={`#${item.toLowerCase()}`}
-                  className="nav-hover-btn"
-                >
-                  {item}
-                </a>
-              ))}
+              {navItems.map((item, index) => {
+                const targetId = item.toLowerCase();
+                return (
+                  <a
+                    key={index}
+                    href={`#${targetId}`} // Keep href for accessibility and fallback
+                    onClick={(e) => handleSmoothScroll(e, item.toLowerCase() === 'home' ? 'home-equivalent' : targetId)}
+                    className="nav-hover-btn"
+                  >
+                    {item}
+                  </a>
+                );
+              })}
             </div>
 
             <button
               onClick={toggleVideoIndicator}
               className="ml-10 flex items-center space-x-0.5"
+              aria-label="Toggle video indicator"
             >
               {[1, 2, 3, 4].map((bar) => (
                 <div
@@ -97,9 +130,7 @@ const NavBar = ({ isVideoPlaying, toggleVideoPlayback }) => {
                   className={clsx("indicator-line", {
                     active: isIndicatorActive,
                   })}
-                  style={{
-                    animationDelay: `${bar * 0.1}s`,
-                  }}
+                  style={{ "--animation-order": bar }}
                 />
               ))}
             </button>

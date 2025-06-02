@@ -1,28 +1,21 @@
 // src/projectData.jsx
 
-// Helper function to create placeholder image URLs (useful for development)
-// const placeholderImg = (width = 1920, height = 1080, text = "Placeholder 16:9") => `https://via.placeholder.com/${width}x${height}.png?text=${encodeURIComponent(text)}`;
-// For actual deployment, you'll replace these with your real image paths.
-// For now, I'll use generic paths like "/img/project-assets/image-name.jpg"
-// and assume you have a placeholder or will create these images.
-
 export const projects = [
   {
     id: "arambhumi-reddy-journey",
     cardVideoSrc: "/videos/feature-1.mp4",
     cardTitle: <>Aram<b>bhumi</b> Reddy</>,
     cardDescription: "My personal journey and drive for excellence in Artificial Intelligence and Tech.",
-    isComingSoon: false,
+    cardTextColor: 'text-blue-50', // Light text for video background
     pageTitle: "My Journey in Tech",
-    pageHeroImage: "/img/about.jpg", // This can be a banner image at the top
+    pageHeroImage: "/img/about.jpg",
     pageIntro: `
-      <p class="text-lg md:text-xl leading-relaxed">Driven by a passion for excellence and innovation in the world of AI. With a Master's in Data Science and over 5 years of experience in the tech industry, my work is characterized by a commitment to the highest standards and meticulous attention to detail.</p>
+      <p class="text-lg md:text-xl leading-relaxed">Fueled by a passion for AI excellence and innovation, my foundation includes a Bachelor's in Computer Science and a Master's in Data Science. With over a year of dedicated experience in the US tech market, my work is defined by an unwavering commitment to the highest standards and meticulous attention to detail.</p>
     `,
     pageSections: [
       {
-        image: "/img/my-profile-pic.jpg", // Using your existing profile pic as an example
+        image: "/img/my-profile-pic.jpg",
         alt: "Arambhumi Reddy",
-        // Adjusted styling for the profile image in the section
         imageCustomStyle: "max-w-xs md:max-w-sm h-auto rounded-full mx-auto shadow-lg border-4 border-yellow-300",
         text: `
           <h3>My Approach</h3>
@@ -37,9 +30,8 @@ export const projects = [
           <p>This portfolio showcases the projects and experiences that have shaped my journey in technology, particularly within the dynamic field of Artificial Intelligence.</p>
         `
       },
-      // Add more sections if needed for this page, up to 8
       {
-        image: "/img/project-assets/journey-collab.jpg", // Replace with actual image
+        image: "/img/office.png",
         alt: "Collaborative Tech Environment",
         text: `
           <h3>The Power of Collaboration</h3>
@@ -51,141 +43,147 @@ export const projects = [
   },
   {
     id: "advanced-rag-system",
-    cardImageSrc: "/img/rag1.jpg",
+    cardImageSrc: "/img/rag1.JPG",
     cardTitle: <>Advanced <b>RAG</b> System</>,
-    cardDescription: "Architecting and optimizing a high-performance RAG system for factual grounding and relevance.",
-    isComingSoon: false,
+    cardDescription: "",
+    cardTextColor: 'text-black',
     pageTitle: "Optimized Retrieval-Augmented Generation",
-    pageHeroImage: "/img/rag.JPG",
+    pageHeroImage: "/img/rag.JPG", // A general hero for the RAG project page
     pageIntro: `
-      <p class="text-lg md:text-xl leading-relaxed">At IvorSource, I led the architecture and development of a sophisticated Retrieval-Augmented Generation (RAG) system designed to enhance the factual accuracy and relevance of Large Language Model responses within the enterprise. The primary goal was to ground LLM outputs in verified internal knowledge, significantly reducing hallucinations and improving the reliability of AI-assisted tasks.</p>
+      <p class="text-lg md:text-xl leading-relaxed">Engaged as an Jr. AI consultant for a prominent financial institution, I was part of a team that led the strategic design and development of a sophisticated Retrieval-Augmented Generation (RAG) system. The initiative was critical for enhancing the precision and contextual relevance of Large Language Model outputs used in internal banking operations. By grounding LLM responses in verified, proprietary knowledge, the system significantly mitigated informational inaccuracies and demonstrably improved the reliability of AI-assisted financial tasks.</p>
     `,
     pageSections: [
       {
-        image: "/img/project-assets/rag-architecture-overview.jpg", // Replace with actual 1920x1080 image
+        image: "/img/ivor_rag_1.JPG",
         alt: "High-level RAG System Architecture",
         text: `
           <h3>System Architecture Overview</h3>
-          <p>The foundation of this project was a robust system architecture. We designed an end-to-end RAG pipeline, strategically selecting Qdrant as our vector database. Its performance, scalability, and advanced filtering capabilities were paramount for handling diverse enterprise datasets and ensuring efficient retrieval tailored to specific user queries or contexts.</p>
-          <p>Data ingestion was a critical phase. We developed a flexible pipeline to process various document formats, implementing sophisticated chunking strategies. This involved experimenting with fixed-size, recursive, and semantic chunking to optimize the balance between contextual completeness of chunks and retrieval precision. The goal was to create vector embeddings that accurately represented the core meaning of each document segment.</p>
+          <p>The system is built upon an advanced multi-agent architecture, orchestrated by a central <strong>System Control Plane</strong>. At the heart of this plane is the <strong>Supervisor Agent</strong>, which intelligently processes incoming user questions. This agent leverages a sophisticated <strong>Memory</strong> component, retaining human feedback, historic questions, answers, and interaction steps to enhance contextual understanding and personalization over time.</p>
+          <p>The Supervisor Agent delegates specialized tasks to a suite of sub-agents: the <strong>Structured Data Agent</strong> queries traditional databases (SQL, Snowflake) for transactional data and status histories; the <strong>Analytics Agent</strong> utilizes tools for performance analysis, transaction attribution, and funds exposure; and the <strong>Un-Structured Data Agent</strong>. My primary involvement focused on this Un-Structured Data Agent, which functions as a sophisticated RAG (Retrieval Augmented Generation) system, processing queries against diverse textual data like meeting notes, emails, and documents to find relevant 'Matching Chunks'. The Supervisor Agent then synthesizes outputs from all active sub-agents, performs a crucial 'Reflection' step for accuracy and coherence, and delivers a comprehensive answer to the user.</p>`
+      },
+      {
+        image: "/img/ivor_rag_2.JPG",
+        alt: "Dual-Path Intelligent Query Processing",
+        text: `
+          <h3>Dual-Path Intelligent Query Processing</h3>
+          <p>Our system initiates with a crucial <strong>Planning</strong> phase to determine the nature of a user's query. Based on this assessment, the query is routed down one of two distinct processing paths: a <strong>General Q/A Flow</strong> or a <strong>Specific Transaction Flow</strong>. Each path is managed by a dedicated supervisor (<code>general_supervisor</code> or <code>specific_supervisor</code>) responsible for orchestrating the subsequent steps.</p>
+          <p>Both flows incorporate user confirmation steps (<code>toolcall_usr_confirm</code>) before dispatching tasks to specialized <strong>agents</strong> (e.g., for structured data, or a combination of structured, unstructured, and analytics for transactional tasks). Following agent processing and a user review (<code>toolcall_usr_review</code>), the system generates a <code>personalized_answer</code>. This answer undergoes a critical <code>reflection_check</code> for accuracy and completeness before the flow segment concludes. Finally, regardless of the initial path, all interactions culminate in a <code>conversation_summarization</code> before the process formally ends, ensuring clarity and a comprehensive record.</p>`
+      },
+      {
+        image: "/img/ivor_rag_3.JPG",
+        alt: "Modular Agent Design & Iterative Processing",
+        text: `
+          <h3>Modular Agent Design & Iterative Processing</h3>
+          <p>Our system's architecture embodies the principle: "<strong>Start simple and refactor often.</strong>" This is evident in its modular design, where distinct operational flows manage different aspects of query processing. At a foundational level (Diagram 1), individual <strong>agents</strong> operate in a loop, deciding to continue tasks—potentially involving tool calls with user interruption points—or conclude their process. More specialized agents (Diagram 2) follow a common pattern of utilizing <strong>tools</strong>, <strong>retrieving</strong> information, <strong>rewriting</strong> or refining that information, and then <strong>generating</strong> an output before ending their specific sub-task.</p>
+          <p>Overseeing these operations, a higher-level <strong>supervisor</strong> (Diagram 3) manages the workflow, checking for necessary data like <code>missing_transactional_data</code>, performing crucial <code>reflection_check</code>s on processed information, and interacting with underlying <code>agents</code>. This supervisor also handles user confirmations (<code>Toolcall usr_confirm</code>) and reviews (<code>Toolresult usr_review</code>) at appropriate junctures. The entire interaction typically begins (Diagram 4) with an <code>analyse_query</code> step, which intelligently routes the user's request to either a <code>general_flow</code> or a <code>specific_transaction_flow</code>, culminating in a <code>conversation_summary</code> to ensure clarity and a complete record of the interaction.</p>
         `
       },
       {
-        image: "/img/project-assets/embedding-model-finetuning.jpg", // Replace with actual 1920x1080 image
-        alt: "Embedding Model Fine-tuning Process",
+        image: "/img/promptengin.png",
+        alt: "Advanced Agent Prompt Engineering Cycle", // Changed alt text to be more specific
         text: `
-          <h3>Embedding Model Fine-Tuning</h3>
-          <p>To achieve superior semantic understanding of our domain-specific content, off-the-shelf embedding models were insufficient. We curated a comprehensive dataset from internal documentation, technical specifications, and historical support tickets. This dataset was then used to fine-tune the BGE-large-en-v1.5 embedding model.</p>
-          <p>The fine-tuning process was iterative, involving rigorous evaluation against domain-specific benchmarks. We focused on improving the model's ability to discern subtle contextual nuances and industry-specific jargon. This resulted in a significant uplift in the relevance of retrieved documents, directly impacting the quality of the LLM's generated responses.</p>
-        `
-      },
-      {
-        image: "/img/project-assets/multi-stage-retrieval.jpg", // Replace
-        alt: "Multi-stage Retrieval with Reranker",
-        text: `
-          <h3>Multi-Stage Retrieval & Reranking</h3>
-          <p>Precision in retrieval was further enhanced by a multi-stage approach. The fine-tuned BGE model performed an initial, broad retrieval from Qdrant, efficiently identifying a set of potentially relevant candidate passages. These candidates were then passed to a more computationally intensive BAAI/bge-reranker-large cross-encoder.</p>
-          <p>The reranker meticulously evaluated each candidate against the original query, providing a refined relevance score. This step was crucial for filtering out less relevant passages and surfacing the most pertinent information for the LLM, effectively balancing speed and accuracy in the retrieval pipeline.</p>
-        `
-      },
-      {
-        image: "/img/project-assets/prompt-engineering-iteration.jpg", // Replace
-        alt: "Iterative Prompt Engineering Cycle",
-        text: `
-          <h3>Strategic Prompt Engineering</h3>
-          <p>The final layer of optimization involved sophisticated prompt engineering. We developed and meticulously iterated on prompt templates designed to guide the downstream LLM. These prompts instructed the model on how to synthesize information from the retrieved contexts, maintain factual consistency, and adhere to specific output formats or tones.</p>
-          <p>Techniques such as few-shot learning, chain-of-thought prompting, and dynamic context injection based on reranker scores were employed. Continuous A/B testing of prompt variations ensured that the LLM could leverage the retrieved information effectively, leading to a <strong>37% improvement in query response relevance</strong> and a drastic reduction in hallucinations.</p>
-          <h4>Technologies Leveraged:</h4>
-          <ul>
-            <li>Python, SQL, VectorDBs (Qdrant)</li>
-            <li>Machine Learning, Deep Learning (PyTorch)</li>
-            <li>NLP, Transformers, RAG, Prompt Engineering, Fine-Tuning (SFT)</li>
-            <li>BGE-large-en-v1.5, BAAI/bge-reranker-large</li>
-          </ul>
-        `
+              <h3>Advanced Agent Prompt Engineering</h3>
+              <p>A meticulously structured prompt guides our Banking Supervisor Agent, enabling it to effectively orchestrate sub-agents and deliver precise, personalized banking support. Key components of this prompt include:</p>
+
+              <p><strong>1. Role (Persona):</strong> Defined as an AI orchestrator (Banking Supervisor Agent) managing user queries by coordinating specialized sub-agents for accurate, personalized responses.</p>
+
+              <p><strong>2. Task (Instruction/Goal):</strong> Analyzes queries, plans the optimal approach (General Q/A or Specific Transaction), dispatches tasks to sub-agents, synthesizes their outputs, performs reflection checks, and delivers the final verified answer.</p>
+
+              <p><strong>3. Input (Context/Data):</strong> Receives user queries, accesses historical interaction <code>Memory</code> for context, and ingests structured outputs ("Query Results," "Matching Chunks") from sub-agents (Transactional, RAG, Analytics).</p>
+
+              <p><strong>4. Output (Format/Style Specification):</strong> Delivers personalized, accurate, and compliant answers, often synthesized from multiple sources. Manages user confirmations (<code>toolcall_user_confirm</code>) and reviews (<code>toolcall_user_review</code>).</p>
+
+              <p><strong>5. Constraints (Limitations/Negative Prompts):</strong> Must strictly adhere to sub-agent tool call schemas, avoid direct task execution, and operate within banking security, data privacy, and verification protocols.</p>
+
+              <p><strong>6. Capabilities & Reminders (Advanced/Meta-Instructions):</strong> Leverages <code>Memory</code> for personalization, orchestrates sub-agents by query type, performs critical reflection checks, and prioritizes clarity and accuracy, thinking step-by-step per system flows.</p>
+
+              <p>This structured prompt engineering ensures the Supervisor Agent effectively utilizes sub-systems, leading to highly relevant responses and significantly reduced errors.</p>
+            `
+
       }
-      // Add 4 more sections to reach 8 if desired
+    
     ]
   },
   {
     id: "notifyvisitors-growth-journey",
-    cardImageSrc: "/img/notifyvisitorlogo.png",
+    cardImageSrc: "/img/notiy.avif",
     cardTitle: <>Notify<b>Visitors</b></>,
     cardDescription: "My foundational journey in data science, contributing to 40%+ growth and user engagement.",
-    isComingSoon: false,
+    cardTextColor: 'text-black', // Assuming notiy.avif is light
     pageTitle: "NotifyVisitors: My Data Science Genesis & Growth Impact",
     pageHeroImage: "/img/notifyvisitorlogo.png",
     pageIntro: `
-      <p class="text-lg md:text-xl leading-relaxed">NotifyVisitors was where my professional journey in data truly began, transitioning from Junior Data Analyst to Data Scientist. This period was instrumental in developing my analytical mindset and technical skills, particularly in leveraging data to drive business success and user engagement.</p>
+      <p class="text-lg md:text-xl leading-relaxed">NotifyVisitors marked the true beginning of my professional journey in data.In the summer of 2021, I landed an internship opportunity through an unexpected connection—one of my clothing brand's customers was impressed by the work I had done, and it turned out his son was a big fan of the line I ran during college (more on that in the Passion Projects section of this portfolio). That internship at NotifyVisitors became a turning point, sharpening my analytical thinking and technical capabilities. It was here that I first learned to harness the power of data to improve user engagement and support meaningful business decisions.</p>
     `,
     pageSections: [
       {
-        image: "/img/notifyvisitors-dashboard-example.png", // Existing image
+        image: "/img/notifuanalytics.png",
         alt: "NotifyVisitors User Engagement Dashboard Example",
         text: `
           <h3>Early Contributions & User Engagement Focus</h3>
-          <p>My initial role involved analyzing user behavior—app installs, clicks, reviews, and purchase history—to uncover insights. Upon promotion to Data Scientist, I focused heavily on user engagement. I applied Machine Learning algorithms like <strong>Random Forest and XGBoost</strong> to identify anomalies and predict user actions, using <strong>Grid Search</strong> for hyperparameter tuning and <strong>PCA</strong> for feature extraction.</p>
-          <p>This data-driven approach to understanding and influencing user behavior directly contributed to boosting user engagement by over <strong>45% within an 8-month period</strong>. These insights were translated into actionable strategies, contributing to over <strong>40% overall company growth.</strong></p>
-        `
+          <p>My initial role centered around building dashboards to visualize user behavior—tracking metrics like app installs, clicks, event activity, and purchase patterns. I worked closely with the customer engagement team to surface actionable insights through Power BI dashboards, enabling smarter segmentation and campaign targeting.</p>
+          <p>This data-driven approach played a key role in improving internal decision-making and optimizing user journeys, directly supporting a significant uplift in user engagement and campaign effectiveness during my internship period.</p>
+      `
       },
       {
-        image: "/img/project-assets/ml-model-workflow.jpg", // Replace with a conceptual ML workflow diagram
+        image: "/img/dashboard_preview.png",
         alt: "Machine Learning Model Development Workflow",
         text: `
           <h3>Key Achievements & Learnings</h3>
-          <p>My time at NotifyVisitors was a period of intense learning and significant professional growth. It solidified my passion for leveraging data to solve complex problems.</p>
+          <p>My time at NotifyVisitors was a period of intense learning and foundational professional growth. It deepened my interest in data and showed me the power of visual storytelling in driving user engagement and business outcomes.</p>
           <ul>
-            <li>Contributed to boosting user engagement by over 45%.</li>
-            <li>Played a role in company initiatives leading to over 40% growth.</li>
-            <li>Mastered ML algorithms (Random Forest, XGBoost) and techniques (Grid Search, PCA).</li>
-            <li>Gained deep experience in analyzing user behavioral data.</li>
-            <li>Developed skills in presenting complex data insights.</li>
+            <li>Designed and delivered Power BI dashboards to help visualize user journeys and campaign performance.</li>
+            <li>Supported data-driven decision-making for the customer engagement team by analyzing behavioral and event data.</li>
+            <li>Learned to work with real-world datasets and gained hands-on experience with event tracking, segmentation, and funnel analysis.</li>
+            <li>Built a strong foundation in communicating data insights to non-technical stakeholders.</li>
+            <li>Grew comfortable working with CSV data, data mapping, and platform-specific SDK event structures.</li>
           </ul>
-          <p>This experience shaped me into the data scientist and AI practitioner I am today.</p>
+          <p>This experience sparked my long-term commitment to solving problems with data and laid the groundwork for my future in analytics and AI.</p>
         `
       }
-      // Add more sections if desired
     ]
   },
   {
     id: "FSU",
-    cardStaticBgClass: "bg-teal-300",
+    cardImageSrc: "/img/fsulogo.svg", // Image for card
+    cardStaticBgClass: "bg-teal-300", // Fallback or border styling
     cardTitle: <>Data <b>Analyst</b></>,
-    cardImageSrc: "/img/fsulogo.svg",
     cardDescription: "",
-    isComingSoon: false,
-    pageTitle: "State of Florida: Inmate Analysis Dashboard (Power BI)",
-    pageHeroImage: "/img/powerbi-dashboard-hero.jpg",
+    pageTitle: "Technical Support & Data Initiatives at FSU",
+    pageHeroImage: "/img/FSU_Lockup_GAR_H_rgb.svg",
     pageIntro: `
-      <p class="text-lg md:text-xl leading-relaxed">During my tenure as a Data Analyst at Florida State University, I developed an Inmate Analysis Dashboard for a State of Florida initiative. This project aimed to provide clearer insights into inmate population trends, demographics, and other key metrics to support data-driven decision-making.</p>
+      <p class="text-lg md:text-xl leading-relaxed">During my tenure at Florida State University, my primary role involved providing comprehensive technical support for the Canvas Learning Management System. This experience allowed me to directly contribute to the university's academic operations. Concurrently, I undertook a significant data analysis project, developing an Inmate Analysis Dashboard for a State of Florida initiative, demonstrating my capabilities in data science and analytics.</p>
     `,
     pageSections: [
       {
-        image: "/img/powerbi-inmate-dashboard-mockup.png", // Existing image
-        alt: "Power BI Inmate Dashboard Mockup",
+        image: "/img/fsu_canvas.png",
+        alt: "Canvas LMS Support Interface",
         text: `
-          <h3>Dashboard Design & Technical Implementation</h3>
-          <p>My role was to transform raw data into actionable intelligence using <strong>Microsoft Power BI</strong>. This involved meticulous data modeling to structure and relate diverse datasets pertaining to inmate information. I authored complex <strong>Data Analysis Expressions (DAX)</strong> to create custom calculations, key performance indicators (KPIs), and dynamic metrics that were central to the dashboard's utility.</p>
-          <p>I designed a suite of professional, interactive visualizations—charts, graphs, and tables—to present the data intuitively. The dashboard enabled users to explore trends over time, filter by various demographic factors, and drill down into specific details, offering a significant improvement over previous manual reporting methods.</p>
-        `
+          <h3>Canvas LMS Technical Support at Florida State University</h3>
+          <p>While pursuing my master's in Data Science at Florida State University, I held a vital part-time role providing dedicated technical support for the Canvas Learning Management System (LMS). My core responsibilities centered on assisting university professors and faculty with troubleshooting complex user issues, which was crucial for facilitating smoother course delivery and enhancing the overall educational experience.</p>
+          <p>I actively managed the Canvas support ticket queue, addressing a wide array of inquiries and implementing timely, effective solutions to minimize disruption to academic activities. A key part of my role also involved developing and disseminating clear instructional materials and effectively communicating Canvas updates and maintenance schedules to faculty, thereby fostering a better understanding and adoption of the platform’s features.</p>
+          `
       },
       {
-        image: "/img/project-assets/powerbi-dax-example.jpg", // Replace with a conceptual DAX code snippet or data model diagram
-        alt: "Example of DAX measures or Data Model in Power BI",
+        image: "/img/fsu_po_powerbi.png",
+        alt: "Power BI Inmate Dashboard Mockup",
         text: `
-          <h3>Impact and Skills Utilized</h3>
-          <p>The resulting dashboard provided stakeholders with a nuanced understanding of inmate population dynamics, facilitating data-informed discussions and supporting strategic planning related to resource allocation and program effectiveness. The ability to quickly visualize trends and filter data was a key outcome.</p>
+          <h3>Impact and Applied Data Science Skills</h3>
+          <p>My work providing technical support for Canvas LMS directly contributed to ensuring consistent course delivery and an improved user experience for both faculty and students at FSU. By efficiently resolving complex support tickets and delivering clear instructional materials, I played a part in minimizing academic disruptions and encouraging the effective use of the platform’s diverse features.</p>
+          <p>Building upon this foundation and seeking to apply my data science acumen, I embraced an opportunity to work on a significant data analysis project with the Florida Department of Corrections (FDC), under the guidance of Michael Burke. For this initiative, I leveraged data from <code>INMATE_ACTIVE_ROOT.txt</code> and related offense datasets to develop a comprehensive, interactive Power BI dashboard. This involved extensive data processing and analysis using <strong>Python (with Pandas for data manipulation and Matplotlib for initial visualizations within Jupyter Notebooks)</strong>, alongside insights derived from <strong>SQL queries</strong>. The project focused on trend, demographic, and offense-specific analyses, culminating in a dashboard that offered the FDC a powerful tool for dynamic data exploration and informed decision-making regarding inmate populations and facility statistics.</p>
           <h4>Skills Utilized:</h4>
           <ul>
-            <li>Microsoft Power BI (Advanced)</li>
-            <li>DAX (Data Analysis Expressions)</li>
-            <li>Data Modeling & Visualization</li>
-            <li>Stakeholder Communication & Requirements Gathering</li>
-            <li>Data Analysis & Interpretation</li>
+            <li>Canvas LMS Support & User Training</li>
+            <li>Technical Troubleshooting & Ticket Resolution</li>
+            <li>Microsoft Power BI (Interactive Dashboard Development, Data Visualization)</li>
+            <li>Python for Data Science (Pandas for data cleaning, processing, and merging; Matplotlib for visualization; Jupyter Notebooks for analysis)</li>
+            <li>SQL (Data Extraction, Aggregation, and Querying)</li>
+            <li>Data Analysis (Trend, Demographic, and Statistical Analysis)</li>
+            <li>Stakeholder Communication & Work Sample Documentation/Presentation</li>
+            <li>Data Management (Handling and transforming large CSV/text datasets)</li>
           </ul>
         `
       }
-      // Add more sections if desired
     ]
   },
   {
@@ -193,127 +191,170 @@ export const projects = [
     cardImageSrc: "/img/kiyodrip.png",
     cardTitle: <>Kiyo-Drip <b>Clothing</b> Brand</>,
     cardDescription: "",
-    cardTextColor: 'text-black',
-    isComingSoon: false,
-    pageTitle: "LLM Serving, Monitoring, and Custom TTS",
-    pageHeroImage: "/img/mlops-dashboard-hero.jpg",
+    cardTextColor: "text-black", // Assuming kiyodrip.png is light
+    
+    pageTitle: "Kiyo-Drip: Building an Anime Streetwear Brand",
+    
+    topSliderTitle: "<h3>Signature Kiyo-Drip Designs</h3>",
+    topSliderImages: [
+      { "src": "/img/mock1.png", "alt": "Kiyo-Drip Uchiha Clan Inspired Hoodie" },
+      { "src": "/img/mock2.png", "alt": "Kiyo-Drip Itachi Inspired Hoodie with Background" },
+      { "src": "/img/mock3.png", "alt": "Kiyo-Drip Haikyuu Fly High Hoodie" },
+      { "src": "/img/mock4.png", "alt": "Kiyo-Drip Sasuke Chidori T-shirt" },
+      { "src": "/img/mock5.png", "alt": "Kiyo-Drip Metsu Kanji Hoodie" }
+    ],
+    topSliderCaption: "<p class=\"text-center mt-2 text-sm text-gray-400\">A showcase of some of the original anime-inspired streetwear designs that defined the Kiyo-Drip brand, from iconic clan symbols to dynamic character art.</p>",
+
     pageIntro: `
-      <p class="text-lg md:text-xl leading-relaxed">A core part of my work at IvorSource involved establishing robust and efficient infrastructure for serving open-source Large Language Models and enabling seamless developer experimentation. This included migrating serving engines, implementing comprehensive monitoring, and integrating custom solutions like Text-to-Speech (TTS).</p>
+      <p class="text-lg md:text-xl leading-relaxed">During my college years in India, amidst the COVID-19 pandemic, I founded Kiyo-Drip (<a href="https://kiyodrip.in/" target="_blank" rel="noopener noreferrer" class="underline hover:text-yellow-300">kiyodrip.in</a>), an anime-inspired streetwear clothing brand. This passion project grew from initial design mockups to a fully operational e-commerce business with a significant market presence, culminating in a successful sale before my move to the United States.</p>
     `,
     pageSections: [
       {
-        image: "/img/project-assets/vllm-deployment.jpg", // Replace
-        alt: "vLLM Containerized Deployment",
+        image: "/img/checkout_ss.jpg",
+        alt: "Kiyo-Drip Shopify Order Confirmation Showing Upfront Payment",
         text: `
-          <h3>Automated, Containerized LLM Deployment (vLLM)</h3>
-          <p>I engineered automated, containerized Docker deployment processes for various open-source LLMs. A key achievement was leading the migration from Text Generation Inference (TGI) to <strong>vLLM</strong>. This transition was pivotal in <strong>significantly boosting throughput and minimizing latency</strong> for our inference servers.</p>
-          <p>The deployment configurations were optimized for streamlined cloud portability and easy adoption across internal development teams, enabling rapid iteration and experimentation with different models and serving configurations. We ensured that the containerization process was well-documented and easily replicable.</p>
+          <h3>Concept, Design, and Initial Launch</h3>
+          <p>The journey of Kiyo-Drip began with a passion for anime and streetwear. I started by creating unique clothing designs and mockups using <strong>GIMP</strong>, focusing on templates that resonated with anime aesthetics. Initially, I leveraged <strong>print-on-demand (POD) services</strong> to bring these designs to life and launched the brand on a custom <strong>Shopify</strong> website. This model was crucial in the early stages as it allowed for a lean startup approach; by securing customer payments upfront through Shopify before initiating production with POD suppliers (as illustrated by typical order fulfillments), we significantly minimized initial capital investment and inventory risk, enabling us to test product-market fit effectively.</p>
         `
       },
       {
-        image: "/img/grafana-dashboard-llm.png", // Existing image, check aspect ratio
-        alt: "Grafana Dashboard for LLM Monitoring",
+        image: "/img/col_fac.png", // Assuming this path exists
+        alt: "Kiyo-Drip Local Manufacturing and Printing",
         text: `
-          <h3>Real-Time Performance Monitoring</h3>
-          <p>To ensure operational excellence, I established real-time performance monitoring for LLM inference servers (vLLM/TGI) and their underlying Virtual Machines. This was achieved using a stack of <strong>Prometheus, Grafana, and relevant exporters (Node Exporter, NVIDIA DCGM Exporter)</strong>.</p>
-          <p>These dashboards provided crucial visibility into resource utilization (CPU, GPU, memory, network), request latency, throughput, and error rates. This proactive monitoring facilitated rapid bottleneck identification, efficient resource management, and ensured high availability of our LLM services.</p>
+          <h3>Transition to Local Manufacturing & Enhanced Quality</h3>
+          <p>As the brand gained traction, I strategically transitioned from print-on-demand to local production to enhance quality and improve profit margins. I established a partnership with a local vendor in Bangalore, India, to source high-quality clothing materials in bulk. For printing, I utilized <strong>Screen Printing</strong> for simpler, high-volume designs due to its cost-effectiveness, and <strong>Direct-to-Garment (DTG) Printing</strong> for more intricate and detailed designs in specific product lines, ensuring premium print quality despite its higher cost. This shift to local manufacturing directly contributed to a <strong>23% boost in profit margins</strong> through strategic sourcing and cost efficiencies.</p>
         `
       },
       {
-        image: "/img/project-assets/kokoro-tts-integration.jpg", // Replace
-        alt: "Kokoro TTS API Integration with OpenWebUI",
+        image: "/img/kiyodripsocial.png", // Assuming this path exists
+        alt: "Kiyo-Drip Marketing and Social Media Presence",
         text: `
-          <h3>Custom TTS Integration (Kokoro_TTS_Api)</h3>
-          <p>Recognizing the need for more personalized and controllable voice outputs for local AI workflows, I developed and integrated a custom Text-to-Speech (TTS) engine, <a href="https://github.com/RedsAnalysis/Kokoro_TTS_Api" target="_blank" rel="noopener noreferrer">Kokoro_TTS_Api</a>. This project involved building a containerized TTS service that could be easily integrated into platforms like OpenWebUI.</p>
-          <p>This custom solution offered greater flexibility in voice selection, prosody control, and speed compared to off-the-shelf solutions, enhancing the user experience for voice-interactive AI applications developed internally. It was built using Python and leveraged open-source TTS models.</p>
-          <h4>Technologies Leveraged:</h4>
+          <h3>Marketing, Growth, and Strategic Operations</h3>
+          <p>To drive customer acquisition, I managed targeted <strong>Google and Facebook advertising campaigns</strong> and cultivated a strong social media presence for the Kiyo-Drip brand. A key factor in our rapid growth was the strategic use of <strong>machine learning algorithms and AI-driven analytics for market analysis</strong>. This data-centric approach allowed us to pinpoint emerging trends and identify optimal product launch timings, leading to a <strong>45% increase in market share</strong> and an expansion of our user base from 1,500 to over 10,000 in just four months.</p>
+          <p>The entire Kiyo-Drip venture transformed into a thriving brand, a testament to effective communication, multitasking, creative problem-solving, and strategic business decisions. Ultimately, I sold Kiyo-Drip for a good margin before relocating to the United States.</p>
+          <h4>Skills & Achievements:</h4>
           <ul>
-            <li>Docker, Docker Compose, Linux (VMs)</li>
-            <li>vLLM, Text Generation Inference (TGI)</li>
-            <li>Prometheus, Grafana, Node Exporter, NVIDIA DCGM Exporter</li>
-            <li>Python, Bash</li>
-            <li>Custom TTS development (e.g., based on Coqui TTS or similar, for Kokoro_TTS_Api)</li>
+            <li>Entrepreneurship & Brand Building (Founder of Kiyo-Drip)</li>
+            <li>E-commerce Management (Shopify)</li>
+            <li>Graphic Design (GIMP, Clothing Mockups)</li>
+            <li>Supply Chain Management (Print-on-Demand to Local Sourcing & Manufacturing)</li>
+            <li>Printing Techniques (Screen Printing, Direct-to-Garment)</li>
+            <li>Digital Marketing (Google Ads, Facebook Ads, Social Media Marketing)</li>
+            <li>Market Analysis (AI-driven analytics, Trend Identification) - Led to 45% market share increase & 10k+ user base</li>
+            <li>Profit Optimization - Boosted profit by 23% via local manufacturing</li>
+            <li>Business Development & Strategic Decision Making</li>
+            <li>Problem-Solving, Communication & Multitasking</li>
           </ul>
         `
       }
-      // Add more sections if desired
     ]
   },
   {
     id: "Open Source Contributions",
-    cardVideoSrc: "/videos/comfyui-docker-feature.mp4",
-    cardTitle: <>Open <b>Source</b>Contributions</>,
-    cardDescription: "Open-source contributions to ComfyUI, including advanced Dockerization for new GPUs.",
-    isComingSoon: false,
-    pageTitle: "ComfyUI: Open Source Contributions & Dockerization",
-    pageHeroImage: "/img/comfyui-hero.jpg",
+    cardImageSrc: "/img/Open_Source_Image.webp",
+    cardTitle: <>Open <b>Source</b> Contributions</>,
+    cardDescription: "",
+    cardTextColor: 'text-blue-50', // Assuming image is dark
+    pageTitle: "Open Source Contributions",
+    pageHeroImage: "/img/comfyui_icon.avif",
     pageIntro: `
       <p class="text-lg md:text-xl leading-relaxed">ComfyUI is a powerful and modular stable diffusion GUI and backend. My contributions have focused on improving its accessibility, especially for users with cutting-edge hardware, and exploring its capabilities for advanced image generation workflows.</p>
     `,
     pageSections: [
       {
-        image: "/img/comfyui-docker-logo.png", // Existing image
+        image: "/img/comfydock.png",
         alt: "ComfyUI Docker Logo and Concept",
         text: `
           <h3>Cutting-Edge ComfyUI Dockerization</h3>
-          <p>One of my key ongoing projects is engineering and maintaining a specialized Docker container for ComfyUI, available on <a href="https://github.com/RedsAnalysis/ComfyUI-Docker" target="_blank" rel="noopener noreferrer">GitHub</a>. This container incorporates updated dependencies, critically including support for newer CUDA versions (e.g., <strong>CUDA 12.8+</strong>) and relevant <strong>PyTorch development builds</strong>.</p>
+          <p>One of my key ongoing projects is engineering and maintaining a specialized Docker container for ComfyUI, available on <a href="https://github.com/RedsAnalysis/ComfyUI" target="_blank" rel="noopener noreferrer">GitHub</a>. This container incorporates updated dependencies, critically including support for newer CUDA versions (e.g., <strong>CUDA 12.8+</strong>) and relevant <strong>PyTorch development builds</strong>.</p>
           <p>The motivation was to address compatibility challenges faced by users with the latest GPUs. My Dockerized solution ensures <strong>seamless execution</strong> on new hardware, allowing users to leverage full GPU power without complex manual setups. This facilitates easier access to cutting-edge generative AI for a wider audience.</p>
         `
       },
       {
-        image: "/img/project-assets/comfyui-pr-example.jpg", // Replace with screenshot or concept of a PR
+        image: "/img/subpack.png", // Assuming path exists
         alt: "Example Pull Request to ComfyUI or related project",
         text: `
-          <h3>Pull Request Contributions & Community Engagement</h3>
-          <p>Beyond Dockerization, I actively contribute to the ComfyUI ecosystem. For instance, I've submitted pull requests aimed at enhancing functionality or fixing issues, such as improving custom node compatibility or streamlining setup processes within the community version or related tools like OpenWebUI when integrating ComfyUI features.</p>
-          <p>Engaging with the open-source community, providing solutions, and sharing knowledge are important aspects of my work. These contributions often involve deep dives into Python, PyTorch, and CUDA dependency management, ensuring that the tools remain accessible and performant for everyone.</p>
-          <h4>Key Aspects:</h4>
-          <ul>
-            <li>Proactive problem-solving for hardware compatibility.</li>
-            <li>Expertise in Docker, CUDA, and PyTorch dependency management.</li>
-            <li>Contribution to the open-source generative AI community.</li>
-          </ul>
-        `
+            <h3>Pull Request Contributions & Community Engagement</h3>
+            <p>Beyond Dockerization, I actively contribute to the ComfyUI ecosystem and related open-source projects. My contributions focus on enhancing functionality, improving user experience, and ensuring broader compatibility. This often involves deep dives into Python, PyTorch, and CUDA dependency management to keep these powerful tools accessible and performant for everyone.</p>
+
+            <h4>Key Contribution: Custom TTS Engine Support for Open WebUI</h4>
+            <p>A significant contribution was the design and implementation of a user-configurable <strong>"Custom TTS" engine feature within Open WebUI</strong>. Previously, users were limited to a fixed set of integrated Text-to-Speech engines. Recognizing the community's need for greater flexibility, I developed a solution that allows users to connect virtually any external TTS service that exposes compatible API endpoints (particularly those adhering to OpenAI TTS API conventions or similar structures).</p>
+            <p><strong>This feature empowers users to:</strong></p>
+            <ul>
+              <li>Integrate niche language providers.</li>
+              <li>Utilize self-hosted TTS models (e.g., XTTSv2 via custom API servers) for enhanced privacy and control.</li>
+              <li>Connect to other commercial or open-source TTS APIs, expanding their choice significantly.</li>
+            </ul>
+            <p>From a user perspective, this involves selecting "Custom TTS" in the audio settings and providing the Base URL and API Key (if required) for their chosen external service. Open WebUI then dynamically fetches available voices and models from the custom endpoint and routes synthesis requests accordingly. I also addressed subsequent bugs, such as ensuring correct rendering of voice and model dropdowns when switching between TTS engines, and kept the feature updated with the main Open WebUI repository. My fork with these enhancements is available on <a href="https://github.com/open-webui/open-webui/discussions/12937" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+            <p>This initiative was well-received by the community, providing a much-needed solution for users requiring specialized or self-managed TTS capabilities, as evidenced by positive user feedback and engagement.</p>
+
+            <h4>General Open Source Philosophy & Other Contributions:</h4>
+            <p>Engaging with the open-source community, providing solutions like the Custom TTS feature, submitting pull requests for bug fixes (e.g., improving custom node compatibility in ComfyUI setups), or streamlining setup processes are important aspects of my work. These efforts aim to make cutting-edge generative AI tools more robust, user-friendly, and adaptable for a wider audience.</p>
+            
+            <h4>Key Aspects of My Open Source Work:</h4>
+            <ul>
+              <li>Proactive problem-solving for hardware compatibility and feature enhancement.</li>
+              <li>Expertise in Python, Docker, CUDA, and PyTorch dependency management.</li>
+              <li>Full-stack feature development (frontend UI integration to backend API interaction, as seen with Custom TTS).</li>
+              <li>Active contribution to the open-source generative AI community.</li>
+              <li>Commitment to maintaining and improving shared tools.</li>
+            </ul>
+          `
       }
-      // Add more sections if desired
     ]
   },
   {
     id: "Personal Projects",
-    cardStaticBgClass: "bg-green-300",
+    cardImageSrc: "/img/github.webp",
     cardTitle: <>Personal <b>Projects</b></>,
-    cardDescription: "My first foray into JavaScript & React for building this interactive portfolio.",
-    isComingSoon: false,
-    pageTitle: "Portfolio Development: Embracing JavaScript & React",
-    pageHeroImage: "/img/portfolio-code-hero.jpg",
+    cardDescription: "",
+    cardTextColor: 'text-blue-50', // Assuming image is dark
+    pageTitle: "Personal Projects and Development",
     pageIntro: `
       <p class="text-lg md:text-xl leading-relaxed">This portfolio website represents a significant personal project and a dive into new technologies. While my core expertise lies in Python for AI/ML, I recognized the importance of modern web development skills to effectively showcase my work.</p>
     `,
     pageSections: [
       {
-        image: "/img/react-js-logos.png", // Existing image
+        image: "/img/webhome.png",
         alt: "React and JavaScript Logos",
         text: `
-          <h3>Learning Journey: JavaScript, React, and Modern Web Tooling</h3>
-          <p>This project was my first substantial endeavor using <strong>JavaScript and React</strong>. My approach was one of rapid, hands-on learning, leveraging online resources, documentation, and AI-assisted coding to grasp core concepts like React Components, JSX, ES6+ features, and styling with Tailwind CSS.</p>
-          <p>I focused on creating an intuitive user experience, striving for clean code, and a visually appealing presentation of my projects. The source code is available on <a href="https://github.com/RedsAnalysis/React-port" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+          <h3>Portfolio Website Development (This Site!)</h3>
+          <p>This portfolio itself represents my first significant dive into <strong>JavaScript and React</strong> for front-end development. My goal was to rapidly learn and apply modern web technologies, including component-based architecture with React, ES6+ features, styling with Tailwind CSS, and leveraging tools like Vite for the build process.</p>
+          <p>I focused on creating an intuitive user experience with a professional aesthetic to effectively showcase my technical journey and projects. The development process reinforced the value of self-directed learning and hands-on application. The source code is available on <a href="https://github.com/RedsAnalysis/React-port" target="_blank" rel="noopener noreferrer" class="underline hover:text-yellow-300">GitHub</a>.</p>
         `
       },
       {
-        image: "/img/project-assets/portfolio-tailwind-code.jpg", // Replace with a screenshot of some Tailwind code from the portfolio
+        image: "/img/ai_bg_rm.png",
+        alt: "AI Background Remover & Inpaint Editor Interface",
+        text: `
+          <h3>AI Background Remover & Inpaint Editor</h3>
+          <p>I developed a powerful Python application, the <a href="https://github.com/RedsAnalysis/AI-Background-Remover-Inpaint-Editor" target="_blank" rel="noopener noreferrer" class="underline hover:text-yellow-300">AI-Background-Remover-Inpaint-Editor</a>, which combines AI-powered background removal (leveraging models via <code>rembg</code>) with manual inpainting tools. It features a user-friendly web interface built with <strong>Gradio</strong>, providing an accessible solution for quick and professional image editing.</p>
+          <p>Key features include support for multiple image formats, a choice of AI models for background removal, and real-time processing. This project showcases my ability to integrate AI models into practical applications and build intuitive user interfaces for complex tasks. It's designed for photographers, designers, or anyone needing robust image editing capabilities.</p>
+        `
+      },
+      {
+        image: "/img/llmsandbox.png",
+        alt: "Local LLM Inference Sandbox Concept",
+        text: `
+          <h3>Current Exploration: Local LLM Inference Sandbox</h3>
+          <p>I am currently developing a fully functional local Large Language Model (LLM) inference environment. This sandbox utilizes <strong>vLLM</strong> for efficient model serving and integrates with <strong>OpenWebUI</strong> as the user interface. A key aspect of this ongoing project is the incorporation of <strong>Langfuse</strong> for comprehensive tracing and observability.</p>
+          <p>The goal is to create a ready-to-go platform for rapidly prototyping and evaluating AI agents and other LLM-powered applications in a controlled, local setting, allowing for detailed analysis of model behavior and performance.</p>
+        `
+      },
+      {
+        image: "/img/hf.svg", 
         alt: "Example of Tailwind CSS code used in the portfolio",
         text: `
-          <h3>Key Takeaways & Growth</h3>
+          <h3>Key Takeaways & Growth from Personal Projects</h3>
           <ul>
-            <li>Demonstrated ability to rapidly learn and apply new programming languages and frameworks.</li>
-            <li>Gained practical experience in front-end development principles and responsive design.</li>
-            <li>Reinforced the value of self-directed learning and leveraging modern development tools.</li>
-            <li>Successfully created a personal platform to share my technical journey.</li>
+            <li>Demonstrated ability to rapidly learn and apply new programming languages and frameworks (JavaScript, React, Python with Gradio).</li>
+            <li>Gained practical experience in front-end development, AI model integration, and building interactive web applications.</li>
+            <li>Reinforced the value of self-directed learning, open-source tools, and leveraging modern development practices.</li>
+            <li>Successfully created platforms to share my technical journey and build useful tools.</li>
           </ul>
-          <p>This project broadened my technical skillset, proving that new technological domains can be effectively mastered with a proactive learning approach.</p>
+          <p>These personal projects have significantly broadened my technical skillset, proving that new technological domains can be effectively mastered with a proactive learning approach and hands-on development.</p>
         `
       }
-      // Add more sections if desired
     ]
   }
 ];

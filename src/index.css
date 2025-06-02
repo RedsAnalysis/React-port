@@ -4,11 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body {
   width: 100dvw;
   overflow-x: hidden;
-  background-color: #c2ca9c; /* MAKE THIS DARK! e.g., gray-950 or black */
+  background-color: #000000; /* Consider changing this to a dark color like #111827 (gray-900) or black if most pages are dark */
   font-family: "General Sans", sans-serif;
   color: #DFDFF0; /* Default text color for the site, if most pages are dark */
 }
@@ -18,101 +17,62 @@ body {
     font-family: "circular-web";
     src: url("/fonts/circularweb-book.woff2") format("woff2");
   }
-
   @font-face {
     font-family: "general";
     src: url("/fonts/general.woff2") format("woff2");
   }
-
   @font-face {
     font-family: "robert-medium";
     src: url("/fonts/robert-medium.woff2") format("woff2");
   }
-
   @font-face {
     font-family: "robert-regular";
     src: url("/fonts/robert-regular.woff2") format("woff2");
   }
-
   @font-face {
     font-family: "zentry";
     src: url("/fonts/zentry-regular.woff2") format("woff2");
   }
+
+  /* Base styling for special font bold tags if universally applied */
+  .special-font b { /* Or just b if you want all b tags to use Zentry */
+    font-family: "Zentry", sans-serif; /* Added sans-serif fallback */
+    font-feature-settings: "ss01" on;
+  }
 }
 
-@layer utilities {
-  .border-hsla {
-    @apply border border-white/20;
-  }
-
+@layer components {
+  /* Navigation Styles */
   .nav-hover-btn {
-    @apply relative ms-10 font-general uppercase; /* Removed text-xs and text-blue-50 from here */
-
-    /* --- NAVBAR LINK STYLING CHANGES --- */
-    @apply text-base; /* Increased font size (was text-xs). You can try text-sm or text-lg */
-    @apply text-white; /* Changed text color to white for better base contrast on #c5b1c5.
-                           If still not enough, consider a darker color like text-gray-800 or text-black */
-
+    @apply relative ms-10 font-general uppercase text-base text-white after:absolute after:-bottom-0.5 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-white after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100 cursor-pointer;
     /* Subtle white glow for better visibility */
     text-shadow:
         0 0 6px rgba(255, 255, 255, 0.6),  /* Soft white glow */
         0 0 8px rgba(255, 255, 255, 0.4); /* Slightly more spread soft white glow */
-    /* --- END OF NAVBAR LINK STYLING CHANGES --- */
-
-    /* Hover underline effect - kept original but ensured after:bg-white for dark mode consistency */
-    @apply after:absolute after:-bottom-0.5 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-white after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100 cursor-pointer;
-    /* Note: dark:after:bg-white was part of original, if you remove dark mode, this can be simplified to just after:bg-white */
   }
 
   .floating-nav {
-    @apply bg-black rounded-lg border;
+    @apply bg-black rounded-lg border border-white/20; /* Added explicit border color matching .border-hsla */
   }
 
-  .absolute-center {
-    @apply absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%];
-  }
-
-  .flex-center {
-    @apply flex justify-center items-center;
-  }
-
-  .mask-clip-path {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  }
-
-  .special-font b {
-    font-family: "Zentry";
-    font-feature-settings: "ss01" on;
-  }
-
-  .hero-heading {
-    @apply uppercase font-zentry font-black text-5xl sm:right-10 sm:text-7xl md:text-9xl lg:text-[12rem];
-  }
-
-  .about-subtext {
-    @apply absolute bottom-[-80dvh] left-1/2 w-full max-w-96 -translate-x-1/2 text-center font-circular-web text-lg md:max-w-[34rem];
-  }
-
-  .about-image {
-    @apply absolute left-1/2 top-0 z-20 h-[60vh] w-96 origin-center -translate-x-1/2 overflow-hidden rounded-3xl md:w-[30vw];
-  }
-
+  /* Animated Title Component */
   .animated-title {
     @apply flex flex-col gap-1 text-7xl uppercase leading-[.8] text-white sm:px-32 md:text-[6rem];
   }
 
-  .animated-word {
-    @apply special-font font-zentry font-black opacity-0;
+  .animated-word { /* Part of animated-title component */
+    @apply special-font font-zentry font-black opacity-0; /* special-font class will apply Zentry to <b> */
     transform: translate3d(10px, 51px, -60px) rotateY(60deg) rotateX(-40deg);
     transform-origin: 50% 50% -150px !important;
     will-change: opacity, transform;
   }
 
-  .bento-tilt_1 {
+  /* Bento Grid Styles */
+  .bento-tilt_1 { /* Specific bento item style */
     @apply relative border-hsla col-span-2 overflow-hidden rounded-md transition-transform duration-300 ease-out;
   }
 
-  .bento-tilt_2 {
+  .bento-tilt_2 { /* Specific bento item style */
     @apply relative col-span-1 row-span-1 overflow-hidden rounded-md transition-transform duration-300 ease-out;
   }
 
@@ -120,79 +80,85 @@ body {
     @apply uppercase md:text-6xl text-4xl font-black font-zentry;
   }
 
+  /* Indicator Line for Navbar Button */
+  .indicator-line {
+    @apply h-1 w-px rounded-full bg-white transition-all duration-200 ease-in-out;
+  }
+  .indicator-line.active { /* This doesn't use @apply, so it's fine here or outside layers */
+    animation: indicator-line 0.5s ease infinite;
+    animation-delay: calc(var(--animation-order) * 0.1s);
+  }
+
+  /* Project Page Specific Component Styles */
+  .project-page-container .prose h2,
+  .project-page-container .prose h3,
+  .project-page-container .prose h4 {
+    @apply font-zentry text-yellow-200;
+    letter-spacing: 0.025em;
+  }
+
+  .project-page-container .prose strong {
+    @apply text-yellow-100;
+  }
+
+  .project-page-container .animated-title { /* Specific override for project page animated title */
+    /* text-align: center; */ /* Example override */
+  }
+
+  /* Story Slider - treating as a component pattern */
   .story-slider-container {
-    width: 100%; /* Full width of its parent */
-    overflow: hidden; /* Crucial for the sliding effect */
-    /* background-color: #0a0a0a; /* Optional: Darker strip for slider if needed */
-    padding: 10px 0; /* Vertical padding around the track */
+    width: 100%;
+    overflow: hidden;
+    padding: 10px 0;
     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
     mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
   }
-  
   .story-slider-track {
     display: flex;
-    /* width is set by inline style based on image count */
     animation: scrollLeft var(--animation-duration) linear infinite;
-    will-change: transform; /* Performance hint for animation */
+    will-change: transform;
   }
-  
   .story-slider-track.paused {
     animation-play-state: paused;
   }
-  
   .story-slider-item {
-    flex-shrink: 0; /* Prevent images from shrinking */
-    /* height and width set by inline style */
-    /* margin-right set by inline style */
-    border-radius: 12px; /* Slightly more rounded */
+    flex-shrink: 0;
+    border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   }
-  
   .story-slider-item:hover {
-    transform: scale(1.08) translateY(-5px); /* More pronounced hover */
-    z-index: 10; /* Bring to front on hover */
+    transform: scale(1.08) translateY(-5px);
+    z-index: 10;
     box-shadow: 0 8px 16px rgba(0,0,0,0.5);
   }
-  
   .story-slider-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures images fill the item, cropping if necessary */
-    display: block; /* Removes any bottom space under image */
+    object-fit: cover;
+    display: block;
   }
-  
-  @keyframes scrollLeft {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(calc(-1 * var(--track-width-single-set)));
-      /* Moves one full set of original images, then repeats */
-    }
-  }
-  
-  /* Modal Styles */
+
+  /* Modal - treating as a component pattern */
   .image-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.85); /* Slightly darker overlay */
+    background-color: rgba(14, 12, 12, 0.85); /* adjust if needed for dark theme */
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    padding: 15px; /* SafeArea for mobile */
+    padding: 15px;
   }
-  
   .image-modal-content {
     position: relative;
-    background-color: #1c1c1e; /* Dark gray for content background */
-    padding: 8px; /* Minimal padding around the image itself */
+    background-color: #2d3133; /* You had this, adjust if needed for dark theme */
+    padding: 8px;
     border-radius: 10px;
     box-shadow: 0 15px 35px rgba(0,0,0,0.6);
     max-width: 90vw;
@@ -201,22 +167,20 @@ body {
     align-items: center;
     justify-content: center;
   }
-  
   .image-modal-content img {
     display: block;
     max-width: 100%;
-    max-height: calc(90vh - 16px); /* Account for padding of .image-modal-content */
-    object-fit: contain; /* Show the whole image, maintain aspect ratio */
-    border-radius: 6px; /* Rounded corners for the image inside modal */
+    max-height: calc(90vh - 16px);
+    object-fit: contain;
+    border-radius: 6px;
   }
-  
   .image-modal-close-button {
     position: absolute;
-    top: -18px; /* Positioned to overlap slightly and be accessible */
+    top: -18px;
     right: -18px;
-    background: #f0f0f0; /* Light background for visibility */
-    color: #1c1c1e;   /* Dark text */
-    border: 2px solid #1c1c1e; /* Border matching modal content for definition */
+    background: #f0f0f0;
+    color: #1c1c1e;
+    border: 2px solid #1c1c1e;
     border-radius: 50%;
     width: 36px;
     height: 36px;
@@ -234,18 +198,49 @@ body {
     transform: scale(1.1);
   }
 
+  /* Gallery Image Styles (if these are general component styles) */
   .gallery-img-container {
     @apply size-64 overflow-hidden bg-violet-300;
   }
-
   .gallery-img {
     @apply size-full bg-cover;
   }
-
   .gallery-img-4 {
     @apply sm:size-80 md:h-96 md:w-[25rem] rounded-lg;
   }
+}
 
+@layer utilities {
+  /* General Utility Classes */
+  .border-hsla {
+    @apply border border-white/20;
+  }
+
+  .absolute-center {
+    @apply absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%];
+  }
+
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+
+  /* Clip Path Utilities */
+  .mask-clip-path {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .hero-heading { /* This could also be a component style if specific to NewHero */
+    @apply uppercase font-zentry font-black text-5xl sm:right-10 sm:text-7xl md:text-9xl lg:text-[12rem];
+  }
+
+  .about-subtext { /* Utility for positioning text in About section */
+    @apply absolute bottom-[-80dvh] left-1/2 w-full max-w-96 -translate-x-1/2 text-center font-circular-web text-lg md:max-w-[34rem];
+  }
+
+  .about-image { /* Utility for positioning image in About section */
+    @apply absolute left-1/2 top-0 z-20 h-[60vh] w-96 origin-center -translate-x-1/2 overflow-hidden rounded-3xl md:w-[30vw];
+  }
+  
   .sword-man-clip-path {
     clip-path: polygon(16% 0, 89% 15%, 75% 100%, 0 97%);
   }
@@ -257,51 +252,44 @@ body {
   .contact-clip-path-2 {
     clip-path: polygon(29% 15%, 85% 30%, 50% 100%, 10% 64%);
   }
+
+  /* Project Page Prose CSS Variables */
+  .project-page-container .prose { /* Custom CSS variables for prose */
+    --tw-prose-links: theme('colors.yellow.300');
+    --tw-prose-invert-links: theme('colors.yellow.300');
+    --tw-prose-body: theme('colors.blue.100 / 0.9');
+    --tw-prose-invert-body: theme('colors.blue.100 / 0.9');
+  }
 }
 
-.indicator-line {
-  @apply h-1 w-px rounded-full bg-white transition-all duration-200 ease-in-out;
-}
-
-.indicator-line.active {
-  animation: indicator-line 0.5s ease infinite;
-  animation-delay: calc(var(--animation-order) * 0.1s);
+/* Keyframes and other global styles NOT using @apply */
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-1 * var(--track-width-single-set))); }
 }
 
 @keyframes indicator-line {
-  0% {
-    height: 4px;
-    transform: translateY(-0px);
-  }
-  50% {
-    height: 16px;
-    transform: translateY(-4px);
-  }
-  100% {
-    height: 4px;
-    transform: translateY(-0px);
-  }
+  0% { height: 4px; transform: translateY(-0px); }
+  50% { height: 16px; transform: translateY(-4px); }
+  100% { height: 4px; transform: translateY(-0px); }
 }
 
-/* From Uiverse.io by G4b413l */
-/* https://uiverse.io/G4b413l/tidy-walrus-92 */
+/* From Uiverse.io by G4b413l - Three Body Loader */
 .three-body {
   --uib-size: 35px;
   --uib-speed: 0.8s;
-  --uib-color: #5d3fd3;
+  --uib-color: #5d3fd3; /* Consider theme('colors.violet.500') or similar if you want to use Tailwind theme */
   position: relative;
   display: inline-block;
   height: var(--uib-size);
   width: var(--uib-size);
   animation: spin78236 calc(var(--uib-speed) * 2.5) infinite linear;
 }
-
 .three-body__dot {
   position: absolute;
   height: 100%;
   width: 30%;
 }
-
 .three-body__dot:after {
   content: "";
   position: absolute;
@@ -311,41 +299,34 @@ body {
   background-color: var(--uib-color);
   border-radius: 50%;
 }
-
 .three-body__dot:nth-child(1) {
   bottom: 5%;
   left: 0;
   transform: rotate(60deg);
   transform-origin: 50% 85%;
 }
-
 .three-body__dot:nth-child(1)::after {
   bottom: 0;
   left: 0;
   animation: wobble1 var(--uib-speed) infinite ease-in-out;
   animation-delay: calc(var(--uib-speed) * -0.3);
 }
-
 .three-body__dot:nth-child(2) {
   bottom: 5%;
   right: 0;
   transform: rotate(-60deg);
   transform-origin: 50% 85%;
 }
-
 .three-body__dot:nth-child(2)::after {
   bottom: 0;
   left: 0;
-  animation: wobble1 var(--uib-speed) infinite calc(var(--uib-speed) * -0.15)
-    ease-in-out;
+  animation: wobble1 var(--uib-speed) infinite calc(var(--uib-speed) * -0.15) ease-in-out;
 }
-
 .three-body__dot:nth-child(3) {
   bottom: -5%;
   left: 0;
   transform: translateX(116.666%);
 }
-
 .three-body__dot:nth-child(3)::after {
   top: 0;
   left: 0;
@@ -353,66 +334,14 @@ body {
 }
 
 @keyframes spin78236 {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
-
 @keyframes wobble1 {
-  0%,
-  100% {
-    transform: translateY(0%) scale(1);
-    opacity: 1;
-  }
-
-  50% {
-    transform: translateY(-66%) scale(0.65);
-    opacity: 0.8;
-  }
+  0%, 100% { transform: translateY(0%) scale(1); opacity: 1; }
+  50% { transform: translateY(-66%) scale(0.65); opacity: 0.8; }
 }
-
 @keyframes wobble2 {
-  0%,
-  100% {
-    transform: translateY(0%) scale(1);
-    opacity: 1;
-  }
-
-  50% {
-    transform: translateY(66%) scale(0.65);
-    opacity: 0.8;
-  }
-}
-/* src/styles/ProjectPage.css or add to index.css */
-
-/* Tailwind Typography will handle most of .prose styling */
-/* You can add overrides here if needed */
-.project-page-container .prose {
-  /* Example: Custom link color within project content */
-  --tw-prose-links: theme('colors.yellow.300');
-  --tw-prose-invert-links: theme('colors.yellow.300'); /* For prose-invert */
-  --tw-prose-body: theme('colors.blue.100 / 0.9'); /* Adjust body text color/opacity */
-  --tw-prose-invert-body: theme('colors.blue.100 / 0.9');
-}
-
-.project-page-container .prose h2,
-.project-page-container .prose h3,
-.project-page-container .prose h4 {
-  /* Ensure Zentry font is applied if not by default in prose */
-  @apply font-zentry text-yellow-200; /* A slightly less bright yellow for headings */
-  letter-spacing: 0.025em; /* Optional: adjust letter spacing for Zentry */
-}
-
-.project-page-container .prose strong {
-  @apply text-yellow-100; /* Make strong text stand out more */
-}
-
-/* If using AnimatedTitle on project page, ensure it's styled appropriately */
-.project-page-container .animated-title {
-  /* Example: Overrides for project page title if needed */
-  /* text-align: center; */
+  0%, 100% { transform: translateY(0%) scale(1); opacity: 1; }
+  50% { transform: translateY(66%) scale(0.65); opacity: 0.8; }
 }
